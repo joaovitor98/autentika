@@ -159,7 +159,7 @@ function changeProductColor(color) {
             productImage.parentElement.appendChild(overlay);
         }
 
-        switch(color) {
+        switch (color) {
             case 'red':
                 overlay.style.background = 'linear-gradient(45deg, rgba(255, 68, 68, 0.3) 0%, rgba(255, 100, 100, 0.2) 50%, rgba(255, 68, 68, 0.3) 100%)';
                 overlay.style.mixBlendMode = 'multiply';
@@ -500,12 +500,12 @@ function addDressHoverEffects() {
     const dressContainers = document.querySelectorAll('.dress-image-container');
 
     dressContainers.forEach(container => {
-        container.addEventListener('mouseenter', function() {
+        container.addEventListener('mouseenter', function () {
             this.style.transform = 'scale(1.05) rotate(2deg)';
             this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
         });
 
-        container.addEventListener('mouseleave', function() {
+        container.addEventListener('mouseleave', function () {
             this.style.transform = 'scale(1) rotate(0deg)';
             this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
         });
@@ -517,7 +517,7 @@ function addSmoothNavigation() {
     const navLinks = document.querySelectorAll('.nav a');
 
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
             scrollToSection(targetId);
@@ -596,7 +596,7 @@ function addDarkModeToggle() {
     darkModeToggle.id = 'dark-mode-toggle';
     darkModeToggle.style.cssText = `
         position: fixed;
-        top: 100px;
+        top: 15px;
         right: 20px;
         background: #333;
         color: white;
@@ -663,7 +663,7 @@ function addStoryChapterAnimations() {
 }
 
 // Inicialização quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Inicializa as imagens dos vestidos
     initializeDressImages();
 
@@ -697,7 +697,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adiciona eventos para abrir modal do produto
     const dressContainers = document.querySelectorAll('.dress-image-container');
     dressContainers.forEach(container => {
-        container.addEventListener('click', function() {
+        container.addEventListener('click', function () {
             openProductModal(this);
         });
     });
@@ -705,14 +705,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adiciona eventos para trocar cor do produto
     const colorOptions = document.querySelectorAll('.color-option');
     colorOptions.forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function () {
             const color = this.getAttribute('data-color');
             changeProductColor(color);
         });
     });
 
     // Fecha modais ao clicar fora
-    window.addEventListener('click', function(event) {
+    window.addEventListener('click', function (event) {
         const productModal = document.getElementById('productModal');
         const cartModal = document.getElementById('cartModal');
 
@@ -727,12 +727,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Formata CEP automaticamente
     const cepInput = document.getElementById('cepInput');
     if (cepInput) {
-        cepInput.addEventListener('input', function() {
+        cepInput.addEventListener('input', function () {
             formatCEP(this);
         });
 
         // Busca CEP ao pressionar Enter
-        cepInput.addEventListener('keypress', function(e) {
+        cepInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 searchCEPAddress();
             }

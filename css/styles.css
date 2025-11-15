@@ -1,4 +1,6 @@
 /* Reset e configurações básicas */
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&family=Bad+Script&family=Limelight&family=Zen+Antique+Soft&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -6,14 +8,14 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Yusei Magic', sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #fff;
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -21,7 +23,7 @@ body {
 /* Header */
 .header {
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     width: 100%;
@@ -36,6 +38,7 @@ body {
 }
 
 .logo h1 {
+    font-family: 'Zen Antique Soft', serif;
     color: #D4AF37;
     font-size: 2rem;
     font-weight: bold;
@@ -48,6 +51,7 @@ body {
 }
 
 .nav a {
+    font-family: 'Yusei Magic', sans-serif;
     text-decoration: none;
     color: #333;
     font-weight: 500;
@@ -73,6 +77,7 @@ body {
 }
 
 .hero-text h2 {
+    font-family: 'Limelight', cursive;
     font-size: 3rem;
     font-weight: bold;
     color: #333;
@@ -80,6 +85,7 @@ body {
 }
 
 .hero-text p {
+    font-family: 'Bad Script', cursive;
     font-size: 1.2rem;
     color: #666;
     font-style: italic;
@@ -87,6 +93,7 @@ body {
 }
 
 .btn-primary {
+    font-family: 'Yusei Magic', sans-serif;
     background-color: #FFD700;
     color: #333;
     border: 2px solid #333;
@@ -127,30 +134,38 @@ body {
     padding: 4rem 0;
 }
 
-.section-title {
-    text-align: center;
+/* Destaques */
+#destaques .section-title {
+    font-family: 'Yusei Magic', sans-serif;
+    text-align: justify;
     font-size: 2.5rem;
     font-weight: bold;
     color: #333;
     margin-bottom: 3rem;
+    position: relative;
+    top: 20px;
 }
 
-/* Dress Grid */
-.dress-grid {
+
+#destaques .dress-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 900px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(24%, 10%));
+    gap: 10%;
+    max-width: 2000px;
+    margin: 80px auto;
 }
 
-.dress-item {
+#destaques .dress-item {
+
     text-align: center;
 }
 
-.dress-image-container {
-    width: 200px;
-    height: 200px;
+#destaques .dress-image-container {
+    top: -20px;
+    right: 5px;
+    height: 10px;
+    width: 610px;
+    height: 650px;
     margin: 0 auto 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -160,19 +175,19 @@ body {
     border-radius: 10px;
 }
 
-.dress-image-container:hover {
+#destaques .dress-image-container:hover {
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.dress-image {
+#destaques .dress-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: all 0.3s ease;
 }
 
-.dress-overlay {
+#destaques .dress-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -186,11 +201,11 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.dress-image-container:hover .dress-overlay {
+#destaques .dress-image-container:hover .dress-overlay {
     opacity: 1;
 }
 
-.change-text {
+#destaques .change-text {
     color: white;
     font-weight: bold;
     font-size: 0.9rem;
@@ -200,21 +215,222 @@ body {
     border-radius: 5px;
 }
 
-.dress-label {
+#destaques .dress-label {
+    text-emphasis-position: revert;
     font-style: italic;
+    margin-left: 130px;
     color: #666;
     font-size: 1.1rem;
+    margin-top: -20px;
+
 }
 
 /* Efeitos especiais para as imagens */
-.dress-image-container.clicked {
+#destaques .dress-image-container.clicked {
     animation: imageChange 0.5s ease;
 }
 
+/* Novidades */
+#novidades .section-title {
+    font-family: 'Yusei Magic', sans-serif;
+    text-align: justify;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 3rem;
+    position: relative;
+    top: -80px;
+}
+
+
+#novidades .dress-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24%, 10%));
+    gap: 10%;
+    max-width: 2000px;
+    margin: 80px auto;
+}
+
+#novidades .dress-item {
+    text-align: center;
+}
+
+#novidades .dress-image-container {
+    top: -110px;
+    right: 5px;
+    height: 10px;
+    width: 610px;
+    height: 650px;
+    margin: 0 auto 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+
+#novidades .dress-image-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#novidades .dress-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+#novidades .dress-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#novidades .dress-image-container:hover .dress-overlay {
+    opacity: 1;
+}
+
+#novidades .change-text {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 10px;
+    background: rgba(212, 175, 55, 0.8);
+    border-radius: 5px;
+}
+
+#novidades .dress-label {
+    text-emphasis-position: revert;
+    font-style: italic;
+    margin-left: 130px;
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: -110px;
+
+}
+
+/* Efeitos especiais para as imagens */
+#novidades .dress-image-container.clicked {
+    animation: imageChange 0.5s ease;
+}
+
+/* Tendencias */
+#tendencias .section-title {
+    font-family: 'Yusei Magic', sans-serif;
+    text-align: justify;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 3rem;
+    position: relative;
+    top: -110px;
+}
+
+#tendencias .dress-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24%, 10%));
+    gap: 10%;
+    max-width: 2000px;
+    margin: 80px auto;
+}
+
+#tendencias .dress-item {
+
+    text-align: center;
+}
+
+#tendencias .dress-image-container {
+    top: -150px;
+    right: 5px;
+    height: 10px;
+    width: 610px;
+    height: 700px;
+    margin: 0 auto 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+
+#tendencias .dress-image-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#tendencias .dress-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+#tendencias .dress-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#tendencias .dress-image-container:hover .dress-overlay {
+    opacity: 1;
+}
+
+#tendencias .change-text {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 10px;
+    background: rgba(212, 175, 55, 0.8);
+    border-radius: 5px;
+}
+
+#tendencias .dress-label {
+    text-emphasis-position: revert;
+    font-style: italic;
+    margin-left: 130px;
+    color: #666;
+    font-size: 1.1rem;
+    margin-top: -150px;
+
+}
+
+/* Efeitos especiais para as imagens */
+#tendencias .dress-image-container.clicked {
+    animation: imageChange 0.5s ease;
+}
+
+
 @keyframes imageChange {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1) rotate(2deg); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1) rotate(2deg);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Quem Somos Section - Redesign Completo */
@@ -260,8 +476,12 @@ body {
 }
 
 @keyframes brandPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 @keyframes titleFadeIn {
@@ -326,11 +546,25 @@ body {
     max-width: 100%;
 }
 
-.story-chapter:nth-child(1) { animation-delay: 0.2s; }
-.story-chapter:nth-child(2) { animation-delay: 0.4s; }
-.story-chapter:nth-child(3) { animation-delay: 0.6s; }
-.story-chapter:nth-child(4) { animation-delay: 0.8s; }
-.story-chapter:nth-child(5) { animation-delay: 1.0s; }
+.story-chapter:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.story-chapter:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.story-chapter:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.story-chapter:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.story-chapter:nth-child(5) {
+    animation-delay: 1.0s;
+}
 
 @keyframes chapterFadeIn {
     from {
@@ -380,8 +614,12 @@ body {
 }
 
 @keyframes iconFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 /* Conteúdo do Capítulo */
@@ -512,8 +750,12 @@ body {
 }
 
 @keyframes shineRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes quoteFadeIn {
@@ -838,9 +1080,17 @@ body {
     animation: fadeInUp 0.6s ease forwards;
 }
 
-.dress-item:nth-child(1) { animation-delay: 0.1s; }
-.dress-item:nth-child(2) { animation-delay: 0.2s; }
-.dress-item:nth-child(3) { animation-delay: 0.3s; }
+.dress-item:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.dress-item:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dress-item:nth-child(3) {
+    animation-delay: 0.3s;
+}
 
 /* Estilos do Modo Escuro */
 .dark-mode {
@@ -1151,6 +1401,8 @@ body {
 
 /* Estilos para Carrinho */
 .cart-button {
+    top: 5px;
+    right: 80px;
     position: relative;
     background: none;
     border: none;
@@ -1194,7 +1446,7 @@ body {
 
 .cart-modal-content {
     position: absolute;
-    right: 0;
+    right: 20px;
     top: 0;
     width: 400px;
     height: 100%;
@@ -1453,3 +1705,5 @@ body {
         width: 100%;
     }
 }
+
+
