@@ -518,8 +518,16 @@ function addSmoothNavigation() {
 
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            
+            // Se o link é para outra página (contém .html) ou não tem #, permite navegação normal
+            if (href.includes('.html') || !href.includes('#')) {
+                return; // Permite navegação normal
+            }
+            
+            // Se é um link âncora na mesma página, faz scroll suave
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
+            const targetId = href.substring(1);
             scrollToSection(targetId);
         });
     });

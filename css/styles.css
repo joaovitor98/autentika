@@ -37,17 +37,17 @@ body {
     padding: 1rem 20px;
 }
 
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
 .logo h1 {
     font-family: 'Zen Antique Soft', serif;
     color: #D4AF37;
     font-size: 2rem;
     font-weight: bold;
-}
-
-.nav ul {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
 }
 
 .nav a {
@@ -60,6 +60,46 @@ body {
 
 .nav a:hover {
     color: #D4AF37;
+}
+
+/* Header Actions (Login, Cadastro, Carrinho) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.user-menu-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+    font-family: 'Yusei Magic', sans-serif;
+    margin-right: 2rem;
+    padding-right: 2rem;
+}
+
+.user-greeting {
+    font-size: 0.85rem;
+    color: #333;
+    font-weight: 400;
+}
+
+.user-subtext {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.user-link {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.user-link:hover {
+    color: #D4AF37;
+    text-decoration: underline;
 }
 
 /* Hero Section */
@@ -811,6 +851,12 @@ body {
     background-color: #f8f9fa;
 }
 
+.contact-section .section-title {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    text-align: left;
+}
+
 .contact-content {
     max-width: 600px;
     margin: 0 auto;
@@ -907,6 +953,24 @@ body {
         gap: 1rem;
     }
 
+    .header-actions {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .user-menu-text {
+        font-size: 0.9rem;
+    }
+
+    .user-greeting {
+        font-size: 0.8rem;
+    }
+
+    .user-subtext {
+        font-size: 0.7rem;
+    }
+
     .nav ul {
         gap: 1rem;
         flex-wrap: wrap;
@@ -927,14 +991,27 @@ body {
         height: 200px;
     }
 
-    .dress-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
+    #destaques .dress-grid,
+    #novidades .dress-grid,
+    #tendencias .dress-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
-    .dress-image-container {
-        width: 150px;
-        height: 150px;
+    #destaques .dress-image-container,
+    #novidades .dress-image-container,
+    #tendencias .dress-image-container {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        aspect-ratio: 1 / 1.07;
+    }
+
+    #destaques .dress-label,
+    #novidades .dress-label,
+    #tendencias .dress-label {
+        margin-left: 0;
+        text-align: center;
     }
 
     /* Responsividade Quem Somos - Tablet */
@@ -991,13 +1068,20 @@ body {
         font-size: 1.8rem;
     }
 
-    .dress-grid {
+    #destaques .dress-grid,
+    #novidades .dress-grid,
+    #tendencias .dress-grid {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
-    .dress-image-container {
-        width: 120px;
-        height: 120px;
+    #destaques .dress-image-container,
+    #novidades .dress-image-container,
+    #tendencias .dress-image-container {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: 1 / 1.07;
     }
 
     /* Responsividade Quem Somos - Mobile */
@@ -1062,6 +1146,28 @@ body {
         gap: 0.5rem;
         font-size: 0.9rem;
     }
+
+    .header-actions {
+        gap: 0.5rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .user-menu-text {
+        font-size: 0.85rem;
+    }
+
+    .user-greeting {
+        font-size: 0.75rem;
+    }
+
+    .user-subtext {
+        font-size: 0.65rem;
+    }
+
+    .cart-button {
+        font-size: 1.2rem;
+    }
 }
 
 /* Animações */
@@ -1109,6 +1215,22 @@ body {
 }
 
 .dark-mode .nav a:hover {
+    color: #FFD700 !important;
+}
+
+.dark-mode .user-greeting {
+    color: #ffffff !important;
+}
+
+.dark-mode .user-subtext {
+    color: #cccccc !important;
+}
+
+.dark-mode .user-link {
+    color: #ffffff !important;
+}
+
+.dark-mode .user-link:hover {
     color: #FFD700 !important;
 }
 
@@ -1703,6 +1825,168 @@ body {
 
     .cart-modal-content {
         width: 100%;
+    }
+}
+
+/* Estilos para Páginas de Autenticação (Login e Cadastro) */
+.auth-section {
+    margin-top: 80px;
+    padding: 4rem 0;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.auth-container {
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.auth-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9ecef;
+}
+
+.auth-title {
+    font-family: 'Limelight', cursive;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    font-family: 'Bad Script', cursive;
+    font-size: 1.1rem;
+    color: #666;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.auth-form {
+    margin-top: 2rem;
+}
+
+.btn-auth {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 14px 24px;
+    font-size: 1.1rem;
+}
+
+.auth-links {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.auth-link {
+    color: #D4AF37;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+.auth-text {
+    color: #666;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #D4AF37;
+}
+
+.remember-me span {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+/* Modo Escuro para Autenticação */
+.dark-mode .auth-section {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%) !important;
+}
+
+.dark-mode .auth-card {
+    background: #2d2d2d !important;
+    border-color: #444 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .auth-title {
+    color: #ffffff !important;
+}
+
+.dark-mode .auth-subtitle {
+    color: #cccccc !important;
+}
+
+.dark-mode .auth-text {
+    color: #cccccc !important;
+}
+
+.dark-mode .remember-me span {
+    color: #cccccc !important;
+}
+
+.dark-mode .auth-link {
+    color: #FFD700 !important;
+}
+
+.dark-mode .auth-link:hover {
+    color: #FFF !important;
+}
+
+/* Responsividade para Autenticação */
+@media (max-width: 768px) {
+    .auth-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .auth-title {
+        font-size: 2rem;
+    }
+
+    .auth-subtitle {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-section {
+        padding: 2rem 0;
+        margin-top: 80px;
+    }
+
+    .auth-card {
+        padding: 1.5rem 1rem;
+        margin: 0 10px;
+    }
+
+    .auth-title {
+        font-size: 1.8rem;
     }
 }
 
