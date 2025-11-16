@@ -159,7 +159,7 @@ function changeProductColor(color) {
             productImage.parentElement.appendChild(overlay);
         }
 
-        switch(color) {
+        switch (color) {
             case 'red':
                 overlay.style.background = 'linear-gradient(45deg, rgba(255, 68, 68, 0.3) 0%, rgba(255, 100, 100, 0.2) 50%, rgba(255, 68, 68, 0.3) 100%)';
                 overlay.style.mixBlendMode = 'multiply';
@@ -500,12 +500,12 @@ function addDressHoverEffects() {
     const dressContainers = document.querySelectorAll('.dress-image-container');
 
     dressContainers.forEach(container => {
-        container.addEventListener('mouseenter', function() {
+        container.addEventListener('mouseenter', function () {
             this.style.transform = 'scale(1.05) rotate(2deg)';
             this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
         });
 
-        container.addEventListener('mouseleave', function() {
+        container.addEventListener('mouseleave', function () {
             this.style.transform = 'scale(1) rotate(0deg)';
             this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
         });
@@ -517,9 +517,17 @@ function addSmoothNavigation() {
     const navLinks = document.querySelectorAll('.nav a');
 
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            
+            // Se o link é para outra página (contém .html) ou não tem #, permite navegação normal
+            if (href.includes('.html') || !href.includes('#')) {
+                return; // Permite navegação normal
+            }
+            
+            // Se é um link âncora na mesma página, faz scroll suave
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
+            const targetId = href.substring(1);
             scrollToSection(targetId);
         });
     });
@@ -596,7 +604,7 @@ function addDarkModeToggle() {
     darkModeToggle.id = 'dark-mode-toggle';
     darkModeToggle.style.cssText = `
         position: fixed;
-        top: 100px;
+        top: 15px;
         right: 20px;
         background: #333;
         color: white;
@@ -662,8 +670,54 @@ function addStoryChapterAnimations() {
     }
 }
 
+// Função para verificar e atualizar status de login no header
+function updateLoginStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const usuarioStr = localStorage.getItem('usuario');
+    const headerActions = document.querySelector('.header-actions .user-menu-text');
+    
+    if (headerActions) {
+        if (isLoggedIn && usuarioStr) {
+            try {
+                const usuario = JSON.parse(usuarioStr);
+                const userName = usuario.nome || 'Usuário';
+                
+                // Atualiza o header para mostrar que está logado
+                headerActions.innerHTML = `
+                    <span class="user-greeting">Olá, <span id="userNameDisplay">${userName}</span></span>
+                    <span class="user-subtext"><a href="perfil.html" class="user-link">Meu Perfil</a> | <a href="#" class="user-link" onclick="logout()">Sair</a></span>
+                `;
+            } catch (e) {
+                console.error('Erro ao parsear usuário:', e);
+                // Se houver erro, mostra opção de login
+                headerActions.innerHTML = `
+                    <span class="user-greeting">Olá, faça seu <a href="login.html" class="user-link">login</a></span>
+                    <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
+                `;
+            }
+        } else {
+            // Se não estiver logado, mostra opção de login
+            headerActions.innerHTML = `
+                <span class="user-greeting">Olá, faça seu <a href="login.html" class="user-link">login</a></span>
+                <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
+            `;
+        }
+    }
+}
+
+// Função de logout (para ser usada no header)
+function logout() {
+    localStorage.removeItem('usuarioId');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('isLoggedIn');
+    window.location.href = 'index.html';
+}
+
 // Inicialização quando o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    // Atualiza status de login no header
+    updateLoginStatus();
+    
     // Inicializa as imagens dos vestidos
     initializeDressImages();
 
@@ -697,7 +751,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adiciona eventos para abrir modal do produto
     const dressContainers = document.querySelectorAll('.dress-image-container');
     dressContainers.forEach(container => {
-        container.addEventListener('click', function() {
+        container.addEventListener('click', function () {
             openProductModal(this);
         });
     });
@@ -705,14 +759,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adiciona eventos para trocar cor do produto
     const colorOptions = document.querySelectorAll('.color-option');
     colorOptions.forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', function () {
             const color = this.getAttribute('data-color');
             changeProductColor(color);
         });
     });
 
     // Fecha modais ao clicar fora
-    window.addEventListener('click', function(event) {
+    window.addEventListener('click', function (event) {
         const productModal = document.getElementById('productModal');
         const cartModal = document.getElementById('cartModal');
 
@@ -727,12 +781,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Formata CEP automaticamente
     const cepInput = document.getElementById('cepInput');
     if (cepInput) {
-        cepInput.addEventListener('input', function() {
+        cepInput.addEventListener('input', function () {
             formatCEP(this);
         });
 
         // Busca CEP ao pressionar Enter
-        cepInput.addEventListener('keypress', function(e) {
+        cepInput.addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 searchCEPAddress();
             }

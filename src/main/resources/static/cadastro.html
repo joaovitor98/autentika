@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - AutêntikA</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body> <!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="logo"><h1><a href="index.html" style="text-decoration: none; color: inherit;">AutêntikA</a></h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="index.html#novidades">Novidades</a></li>
+                <li><a href="index.html#destaques">Ofertas</a></li>
+                <li><a href="index.html#quemsomos">Quem Somos</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <br></div>
+</header> <!-- Cadastro Section -->
+<section class="section auth-section">
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-card"><h2 class="auth-title">Criar Conta</h2>
+                <p class="auth-subtitle">Junte-se à AutêntikA e descubra moda autêntica</p>
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group"><label for="registerName">Nome Completo:</label> <input type="text"
+                                                                                                    id="registerName"
+                                                                                                    name="name" required
+                                                                                                    placeholder="Seu nome completo">
+                    </div>
+                    <div class="form-group"><label for="registerEmail">E-mail:</label> <input type="email"
+                                                                                              id="registerEmail"
+                                                                                              name="email" required
+                                                                                              placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group"><label for="registerPhone">Telefone:</label> <input type="tel"
+                                                                                                id="registerPhone"
+                                                                                                name="phone" required
+                                                                                                placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group"><label for="registerPassword">Senha:</label> <input type="password"
+                                                                                                id="registerPassword"
+                                                                                                name="password" required
+                                                                                                placeholder="Mínimo 6 caracteres">
+                    </div>
+                    <div class="form-group"><label for="registerConfirmPassword">Confirmar Senha:</label> <input
+                            type="password" id="registerConfirmPassword" name="confirmPassword" required
+                            placeholder="Digite a senha novamente"></div>
+                    <div class="form-group"><label class="remember-me"> <input type="checkbox" id="acceptTerms"
+                                                                               name="acceptTerms" required> <span>Eu aceito os <a
+                            href="#" class="auth-link">termos e condições</a> e a <a href="#" class="auth-link">política de privacidade</a></span>
+                    </label></div>
+                    <button type="submit" class="btn-primary btn-auth">Criar Conta</button>
+                </form>
+                <div class="auth-links"><p class="auth-text">Já tem uma conta? <a href="login.html" class="auth-link">Faça
+                    login aqui</a></p></div>
+            </div>
+        </div>
+    </div>
+</section> <!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column"><h3>Institucional</h3>
+                <ul>
+                    <li><a href="#">Políticas de privacidade</a></li>
+                    <li><a href="#">Sobre a AutêntikA</a></li>
+                </ul>
+            </div>
+            <div class="footer-column"><h3>Ajuda e Suporte</h3>
+                <ul>
+                    <li><a href="#">Segurança</a></li>
+                    <li><a href="#">Dúvidas frequentes</a></li>
+                </ul>
+            </div>
+            <div class="footer-column"><h3>Atendimento</h3>
+                <ul>
+                    <li><a href="#">Entre em contato</a></li>
+                    <li><a href="#">Lojas parceiras</a></li>
+                </ul>
+            </div>
+            <div class="footer-column"><h3>Mídias Sociais</h3>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path d="M20.52 3.48A11.88 11.88 0 0 0 12 0C5.373 0 .01 5.373 0 12a11.86 11.86 0 0 0 2.25 6.62L0 24l5.57-1.7A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.2-1.25-6.2-3.48-8.52zM12 21.5a9.47 9.47 0 0 1-4.85-1.33l-.35-.21-3.31.99.94-3.23-.23-.34A9.5 9.5 0 1 1 21.5 12 9.47 9.47 0 0 1 12 21.5z"/>
+                    <path d="M17.24 14.1c-.29-.15-1.71-.84-1.98-.94-.27-.11-.47-.15-.67.15s-.77.94-.95 1.13c-.18.19-.36.21-.67.07a5.52 5.52 0 0 1-2.05-1.27 7.15 7.15 0 0 1-1.33-1.65c-.14-.27 0-.41.11-.55.11-.11.27-.29.41-.43.14-.15.18-.27.27-.45.09-.18 0-.34-.05-.48-.07-.15-.67-1.62-.92-2.23-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.34-.28.27-1.06 1.04-1.06 2.54s1.09 2.96 1.24 3.17c.15.2 2.14 3.33 5.18 4.67 3.04 1.34 3.04.9 3.59.84.55-.06 1.79-.73 2.04-1.43.25-.7.25-1.3.18-1.43-.07-.14-.27-.22-.57-.37z"/>
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17" cy="7" r="1.2" fill="currentColor"></circle>
+                </svg>
+            </div>
+        </div>
+    </div>
+    </div> </footer>
+<script src="js/script.js"></script>
+<script>
+    function formatPhone(input) {
+        let value = input.value.replace(/\D/g, '');
+        if (value.length <= 11) {
+            value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+            if (value.length < 14) {
+                value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+            }
+        }
+        input.value = value;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const registerForm = document.getElementById('registerForm');
+        const phoneInput = document.getElementById('registerPhone');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function () {
+                formatPhone(this);
+            });
+        }
+        if (registerForm) {
+            registerForm.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const phone = document.getElementById('registerPhone').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                const acceptTerms = document.getElementById('acceptTerms').checked;
+                
+                if (!name || !email || !phone || !password || !confirmPassword) {
+                    alert('Por favor, preencha todos os campos.');
+                    return;
+                }
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Por favor, insira um e-mail válido.');
+                    return;
+                }
+                if (password.length < 6) {
+                    alert('A senha deve ter no mínimo 6 caracteres.');
+                    return;
+                }
+                if (password !== confirmPassword) {
+                    alert('As senhas não coincidem. Por favor, verifique.');
+                    return;
+                }
+                if (!acceptTerms) {
+                    alert('Por favor, aceite os termos e condições para continuar.');
+                    return;
+                }
+                
+                const submitButton = registerForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                submitButton.textContent = 'Criando conta...';
+                submitButton.disabled = true;
+                
+                try {
+                    // Faz a requisição para a API
+                    const response = await fetch('http://localhost:8080/api/auth/cadastro', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            nome: name,
+                            email: email,
+                            senhaHash: password
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        // Salva informações do usuário no localStorage para manter logado
+                        if (data.usuario) {
+                            localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                            localStorage.setItem('usuarioId', data.usuario.id);
+                            localStorage.setItem('isLoggedIn', 'true');
+                        }
+                        
+                        alert('Conta criada com sucesso! Bem-vindo à AutêntikA!');
+                        window.location.href = 'index.html';
+                    } else {
+                        alert('Erro: ' + data.message);
+                        submitButton.textContent = originalText;
+                        submitButton.disabled = false;
+                    }
+                } catch (error) {
+                    console.error('Erro ao cadastrar:', error);
+                    alert('Erro ao conectar com o servidor. Verifique se o servidor está rodando.');
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                }
+            });
+        }
+    }); </script>
+</body>
+</html>

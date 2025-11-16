@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutêntikA - Eleve seu estilo</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <!-- Header -->
 <header class="header">
     <div class="container">
         <div class="logo">
-            <h1>AutêntikA</h1>
+            <h1><a href="index.html" style="text-decoration: none; color: inherit;">AutêntikA</a></h1>
         </div>
         <nav class="nav">
             <ul>
@@ -22,10 +22,16 @@
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
-        <button class="cart-button" onclick="openCartModal()">
-            🛒
-            <span class="cart-count" id="cartCount">0</span>
-        </button>
+        <div class="header-actions">
+            <div class="user-menu-text">
+                <span class="user-greeting">Olá, faça seu <a href="login.html" class="user-link">login</a></span>
+                <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
+            </div>
+            <button class="cart-button" onclick="openCartModal()">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
     </div>
 </header>
 
@@ -54,7 +60,8 @@
         <div class="dress-grid">
             <div class="dress-item" data-category="casual">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="ChatGPT Image 15 de out. de 2025, 16_41_58.png" alt="Vestido Casual" class="dress-image">
+                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_41_58.png" alt="Vestido Casual"
+                         class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -63,7 +70,8 @@
             </div>
             <div class="dress-item" data-category="festa">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="ChatGPT Image 15 de out. de 2025, 16_44_11.png" alt="Vestido de Festa" class="dress-image">
+                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_44_11.png"
+                         alt="Vestido de Festa" class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -72,7 +80,8 @@
             </div>
             <div class="dress-item" data-category="formal">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="ChatGPT Image 15 de out. de 2025, 16_46_29.png" alt="Vestido Formal" class="dress-image">
+                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_46_29.png" alt="Vestido Formal"
+                         class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -90,7 +99,8 @@
         <div class="dress-grid">
             <div class="dress-item" data-category="curto">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="Gemini_Generated_Image_hdspjuhdspjuhdsp.png" alt="Vestido Curto" class="dress-image">
+                    <img src="images/Gemini_Generated_Image_wl9z4xwl9z4xwl9z.png" alt="Vestido Longo"
+                         class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -99,7 +109,8 @@
             </div>
             <div class="dress-item" data-category="longo">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="Gemini_Generated_Image_wl9z4xwl9z4xwl9z.png" alt="Vestido Longo" class="dress-image">
+                    <img src="images/Gemini_Generated_Image_wl9z4xwl9z4xwl9z.png" alt="Vestido Longo"
+                         class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -108,7 +119,8 @@
             </div>
             <div class="dress-item" data-category="tubinho">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="Gemini_Generated_Image_wl9z4xwl9z4xwl9z (1).png" alt="Vestido Tubinho" class="dress-image">
+                    <img src="images/Gemini_Generated_Image_wl9z4xwl9z4xwl9z%20(1).png" alt="Vestido Tubinho"
+                         class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -120,13 +132,14 @@
 </section>
 
 <!-- Tendências Section -->
-<section class="section">
+<section id="tendencias" class="section">
     <div class="container">
         <h2 class="section-title">Tendências</h2>
         <div class="dress-grid">
             <div class="dress-item" data-category="babydoll">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="ChatGPT Image 15 de out. de 2025, 16_41_58.png" alt="Vestido Babydoll" class="dress-image">
+                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_41_58.png"
+                         alt="Vestido Babydoll" class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -135,7 +148,8 @@
             </div>
             <div class="dress-item" data-category="midi">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="ChatGPT Image 15 de out. de 2025, 16_44_11.png" alt="Vestido Midi" class="dress-image">
+                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_44_11.png" alt="Vestido Midi"
+                         class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -144,7 +158,8 @@
             </div>
             <div class="dress-item" data-category="slip-dress">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="ChatGPT Image 15 de out. de 2025, 16_46_29.png" alt="Vestido Slip Dress" class="dress-image">
+                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_46_29.png"
+                         alt="Vestido Slip Dress" class="dress-image">
                     <div class="dress-overlay">
                         <span class="change-text">Clique para trocar</span>
                     </div>
@@ -158,7 +173,8 @@
 <!-- Quem Somos Section -->
 <section id="quemsomos" class="section quem-somos-section">
     <div class="container">
-        <h2 class="section-title story-main-title">Quem Somos — A História da <span class="brand-highlight">Autêntica</span></h2>
+        <h2 class="section-title story-main-title">Quem Somos — A História da <span
+                class="brand-highlight">Autêntica</span></h2>
 
         <div class="quem-somos-content">
             <!-- Timeline Visual -->
@@ -170,8 +186,13 @@
                     <div class="chapter-content">
                         <h3 class="chapter-title">O Começo de Tudo</h3>
                         <p class="story-paragraph">
-                            A Autêntica nasceu de um <span class="highlight-word">sonho</span> simples, mas cheio de <span class="highlight-word">coragem</span> e <span class="highlight-word">determinação</span>.
-                            Há quatro anos, a fundadora vivia um momento de incerteza — havia deixado o emprego e, em uma cidade pequena, com poucas oportunidades, não sabia por onde recomeçar. Foi então que, com o incentivo da mãe e a ajuda generosa de uma vizinha costureira, deu os primeiros pontos de uma nova história.
+                            A Autêntica nasceu de um <span class="highlight-word">sonho</span> simples, mas cheio de
+                            <span class="highlight-word">coragem</span> e <span
+                                class="highlight-word">determinação</span>.
+                            Há quatro anos, a fundadora vivia um momento de incerteza — havia deixado o emprego e, em
+                            uma cidade pequena, com poucas oportunidades, não sabia por onde recomeçar. Foi então que,
+                            com o incentivo da mãe e a ajuda generosa de uma vizinha costureira, deu os primeiros pontos
+                            de uma nova história.
                         </p>
                     </div>
                     <div class="chapter-icon">✨</div>
@@ -183,7 +204,11 @@
                     <div class="chapter-content">
                         <h3 class="chapter-title">A Descoberta do Talento</h3>
                         <p class="story-paragraph">
-                            Logo no primeiro dia em frente à máquina, descobriu um <span class="highlight-word">talento</span> que até então estava adormecido. No segundo, tomou a <span class="highlight-word">decisão</span> que mudaria o rumo da sua vida: investiu o único dinheiro que tinha na compra de sua primeira máquina de costura. A partir dali, cada costura era mais do que um trabalho — era a <span class="highlight-word">construção de um sonho</span>.
+                            Logo no primeiro dia em frente à máquina, descobriu um <span
+                                class="highlight-word">talento</span> que até então estava adormecido. No segundo, tomou
+                            a <span class="highlight-word">decisão</span> que mudaria o rumo da sua vida: investiu o
+                            único dinheiro que tinha na compra de sua primeira máquina de costura. A partir dali, cada
+                            costura era mais do que um trabalho — era a <span class="highlight-word">construção de um sonho</span>.
                         </p>
                     </div>
                     <div class="chapter-icon">💫</div>
@@ -195,7 +220,14 @@
                     <div class="chapter-content">
                         <h3 class="chapter-title">Crescimento e Propósito</h3>
                         <p class="story-paragraph">
-                            Durante o primeiro ano, trabalhou para outras pessoas, aprendeu novas técnicas, conquistou clientes e foi comprando novas máquinas, uma de cada vez. Com o tempo, a experiência e a <span class="highlight-word">paixão</span> pela costura se transformaram em <span class="highlight-word">propósito</span>. Assim surgiu a marca Autêntica, criada para representar não apenas roupas, mas histórias de <span class="highlight-word">superação</span>, <span class="highlight-word">independência</span> e <span class="highlight-word">amor</span> pelo que se faz.
+                            Durante o primeiro ano, trabalhou para outras pessoas, aprendeu novas técnicas, conquistou
+                            clientes e foi comprando novas máquinas, uma de cada vez. Com o tempo, a experiência e a
+                            <span class="highlight-word">paixão</span> pela costura se transformaram em <span
+                                class="highlight-word">propósito</span>. Assim surgiu a marca Autêntica, criada para
+                            representar não apenas roupas, mas histórias de <span
+                                class="highlight-word">superação</span>, <span
+                                class="highlight-word">independência</span> e <span class="highlight-word">amor</span>
+                            pelo que se faz.
                         </p>
                     </div>
                     <div class="chapter-icon">🌟</div>
@@ -207,7 +239,12 @@
                     <div class="chapter-content">
                         <h3 class="chapter-title">Consolidação da Marca</h3>
                         <p class="story-paragraph">
-                            Com o crescimento da marca, vieram novas conquistas: a contratação de uma equipe própria, com cortador e estilista, a abertura de uma loja de tecidos e a estruturação de uma produção completa. Hoje, três anos depois, a Autêntica se consolida como uma marca que valoriza o <span class="highlight-word">trabalho artesanal</span>, o cuidado em cada detalhe e a <span class="highlight-word">força da mulher empreendedora</span> que acredita no seu próprio talento.
+                            Com o crescimento da marca, vieram novas conquistas: a contratação de uma equipe própria,
+                            com cortador e estilista, a abertura de uma loja de tecidos e a estruturação de uma produção
+                            completa. Hoje, três anos depois, a Autêntica se consolida como uma marca que valoriza o
+                            <span class="highlight-word">trabalho artesanal</span>, o cuidado em cada detalhe e a <span
+                                class="highlight-word">força da mulher empreendedora</span> que acredita no seu próprio
+                            talento.
                         </p>
                     </div>
                     <div class="chapter-icon">👑</div>
@@ -219,8 +256,12 @@
                     <div class="chapter-content">
                         <h3 class="chapter-title">O Futuro Digital</h3>
                         <p class="story-paragraph">
-                            Agora, em uma <span class="highlight-word">nova fase</span>, a Autêntica amplia seus horizontes e chega ao <span class="highlight-word">mundo digital</span>.
-                            Nosso papel foi transformar toda essa trajetória em um site que transmite a essência da marca — <span class="highlight-word gold">autêntica</span>, <span class="highlight-word gold">criativa</span> e <span class="highlight-word gold">inspiradora</span> — refletindo cada ponto de costura que construiu essa história.
+                            Agora, em uma <span class="highlight-word">nova fase</span>, a Autêntica amplia seus
+                            horizontes e chega ao <span class="highlight-word">mundo digital</span>.
+                            Nosso papel foi transformar toda essa trajetória em um site que transmite a essência da
+                            marca — <span class="highlight-word gold">autêntica</span>, <span
+                                class="highlight-word gold">criativa</span> e <span class="highlight-word gold">inspiradora</span>
+                            — refletindo cada ponto de costura que construiu essa história.
                         </p>
                     </div>
                     <div class="chapter-icon">🚀</div>
@@ -295,12 +336,19 @@
             </div>
             <div class="footer-column">
                 <h3>Mídias Sociais</h3>
-                <div class="social-icons">
-                    <a href="#" class="social-icon">📱 WhatsApp</a>
-                    <a href="#" class="social-icon">📷 Instagram</a>
-                </div>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path d="M20.52 3.48A11.88 11.88 0 0 0 12 0C5.373 0 .01 5.373 0 12a11.86 11.86 0 0 0 2.25 6.62L0 24l5.57-1.7A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.2-1.25-6.2-3.48-8.52zM12 21.5a9.47 9.47 0 0 1-4.85-1.33l-.35-.21-3.31.99.94-3.23-.23-.34A9.5 9.5 0 1 1 21.5 12 9.47 9.47 0 0 1 12 21.5z"/>
+                    <path d="M17.24 14.1c-.29-.15-1.71-.84-1.98-.94-.27-.11-.47-.15-.67.15s-.77.94-.95 1.13c-.18.19-.36.21-.67.07a5.52 5.52 0 0 1-2.05-1.27 7.15 7.15 0 0 1-1.33-1.65c-.14-.27 0-.41.11-.55.11-.11.27-.29.41-.43.14-.15.18-.27.27-.45.09-.18 0-.34-.05-.48-.07-.15-.67-1.62-.92-2.23-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.34-.28.27-1.06 1.04-1.06 2.54s1.09 2.96 1.24 3.17c.15.2 2.14 3.33 5.18 4.67 3.04 1.34 3.04.9 3.59.84.55-.06 1.79-.73 2.04-1.43.25-.7.25-1.3.18-1.43-.07-.14-.27-.22-.57-.37z"/>
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17" cy="7" r="1.2" fill="currentColor"></circle>
+                </svg>
             </div>
         </div>
+    </div>
     </div>
 </footer>
 
@@ -380,6 +428,6 @@
     </div>
 </div>
 
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
