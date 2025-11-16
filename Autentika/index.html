@@ -22,12 +22,94 @@
                     <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
-            <button class="cart-button" onclick="openCartModal()">
-                🛒
-                <span class="cart-count" id="cartCount">0</span>
-            </button>
+            <div class="header-actions">
+                <div class="user-menu-text">
+                    <span class="user-greeting">Olá, faça seu <a href="#" id="openLoginModal" class="user-link">login</a></span>
+                    <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
+                </div>
+                <button class="settings-button" id="openSettingsModal" title="Configurações">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3m15.364 6.364l-4.243-4.243m-4.242 0L5.636 18.364m12.728 0l-4.243-4.243m-4.242 0L5.636 5.636"></path>
+                    </svg>
+                </button>
+                <button class="cart-button" onclick="openCartModal()">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
         </div>
     </header>
+    
+    <!-- Banner Promocional Dinâmico -->
+    <div id="promoBanner" class="promo-banner" style="display:none;">
+        <div class="promo-content" id="promoContent"></div>
+    </div>
+    
+    <!-- Modal de Configurações -->
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-modal-dialog">
+            <div class="settings-card">
+                <div class="settings-header">
+                    <h3 class="settings-title">Configurações</h3>
+                    <button class="close-modal" onclick="closeSettingsModal()">&times;</button>
+                </div>
+                <div class="settings-body">
+                    <div class="settings-section">
+                        <h4 class="settings-section-title">Temas Sazonais</h4>
+                        <div class="theme-options">
+                            <button id="btnBlackFriday" class="theme-option-btn theme-blackfriday-btn" onclick="applyTheme('blackfriday')">
+                                <span class="theme-icon">🛍️</span>
+                                <span class="theme-name">Black Friday</span>
+                                <span class="theme-desc">Descontos imperdíveis!</span>
+                            </button>
+                            <button id="btnNatal" class="theme-option-btn theme-natal-btn" onclick="applyTheme('natal')">
+                                <span class="theme-icon">🎄</span>
+                                <span class="theme-name">Natal</span>
+                                <span class="theme-desc">Espírito natalino!</span>
+                            </button>
+                            <button class="theme-option-btn theme-default-btn" onclick="applyTheme('default')">
+                                <span class="theme-icon">✨</span>
+                                <span class="theme-name">Tema Padrão</span>
+                                <span class="theme-desc">Voltar ao normal</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-dialog">
+            <div class="login-card">
+                <div class="login-header">
+                    <h3 class="login-title">Entrar na AutêntikA</h3>
+                    <button class="close-modal" onclick="closeLoginModal()">&times;</button>
+                </div>
+                <div class="login-body">
+                    <form class="auth-form" onsubmit="submitLogin(event)">
+                        <div class="form-group">
+                            <label for="loginEmail">E-mail</label>
+                            <input type="email" id="loginEmail" placeholder="seu@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginSenha">Senha</label>
+                            <input type="password" id="loginSenha" placeholder="••••••••" required>
+                        </div>
+                        <label class="remember-me">
+                            <input type="checkbox"> <span>Lembrar-me</span>
+                        </label>
+                        <button type="submit" class="btn-primary btn-auth">Entrar</button>
+                        <p class="auth-text" style="text-align:center;margin-top:10px;">
+                            Nova por aqui? <a class="auth-link" href="cadastro.html">Cadastre-se</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
@@ -296,8 +378,8 @@
                 <div class="footer-column">
                     <h3>Mídias Sociais</h3>
                     <div class="social-icons">
-                        <a href="#" class="social-icon">📱 WhatsApp</a>
-                        <a href="#" class="social-icon">📷 Instagram</a>
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M20.52 3.48A11.88 11.88 0 0 0 12 0C5.373 0 .01 5.373 0 12a11.86 11.86 0 0 0 2.25 6.62L0 24l5.57-1.7A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.2-1.25-6.2-3.48-8.52zM12 21.5a9.47 9.47 0 0 1-4.85-1.33l-.35-.21-3.31.99.94-3.23-.23-.34A9.5 9.5 0 1 1 21.5 12 9.47 9.47 0 0 1 12 21.5z"/><path d="M17.24 14.1c-.29-.15-1.71-.84-1.98-.94-.27-.11-.47-.15-.67.15s-.77.94-.95 1.13c-.18.19-.36.21-.67.07a5.52 5.52 0 0 1-2.05-1.27 7.15 7.15 0 0 1-1.33-1.65c-.14-.27 0-.41.11-.55.11-.11.27-.29.41-.43.14-.15.18-.27.27-.45.09-.18 0-.34-.05-.48-.07-.15-.67-1.62-.92-2.23-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.34-.28.27-1.06 1.04-1.06 2.54s1.09 2.96 1.24 3.17c.15.2 2.14 3.33 5.18 4.67 3.04 1.34 3.04.9 3.59.84.55-.06 1.79-.73 2.04-1.43.25-.7.25-1.3.18-1.43-.07-.14-.27-.22-.57-.37z"/></svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17" cy="7" r="1.2" fill="currentColor"></circle></svg>
                     </div>
                 </div>
             </div>

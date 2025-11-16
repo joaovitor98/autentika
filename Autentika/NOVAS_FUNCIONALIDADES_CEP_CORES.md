@@ -113,3 +113,4 @@ background: linear-gradient(45deg, rgba(255, 68, 68, 0.3) 0%, rgba(255, 100, 100
 **🎊 Todas as funcionalidades estão funcionando perfeitamente!**
 
 **Desenvolvido com ❤️ para a AutêntikA**
+

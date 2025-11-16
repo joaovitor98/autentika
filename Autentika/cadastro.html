@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutêntikA - Cadastro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1><a href="index.html" style="text-decoration: none; color: inherit;">AutêntikA</a></h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html#inicio">Início</a></li>
+                    <li><a href="index.html#novidades">Novidades</a></li>
+                    <li><a href="index.html#destaques">Ofertas</a></li>
+                    <li><a href="index.html#quemsomos">Quem Somos</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="user-menu-text">
+                    <span class="user-greeting">Já tem conta? <a href="login.html" class="user-link">Faça login</a></span>
+                </div>
+                <div class="theme-switcher">
+                    <button id="btnBlackFriday" class="btn-primary">Black Friday</button>
+                    <button id="btnNatal" class="btn-primary">Natal</button>
+                </div>
+                <button class="cart-button" onclick="openCartModal()">
+                    🛒
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="auth-section">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1 class="auth-title">Crie sua conta</h1>
+                <p class="auth-subtitle">É rapidinho e gratuito</p>
+                <form class="auth-form">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" placeholder="Seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" placeholder="Crie uma senha" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-auth">Cadastrar</button>
+                    <p class="auth-text">Já tem conta? <a class="auth-link" href="login.html">Entre aqui</a></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

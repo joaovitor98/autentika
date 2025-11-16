@@ -1,4 +1,5 @@
 /* Reset e configurações básicas */
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&family=Bad+Script&family=Limelight&family=Zen+Antique+Soft&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +7,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Yusei Magic', sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #fff;
@@ -36,11 +37,576 @@ body {
 }
 
 .logo h1 {
+    font-family: 'Zen Antique Soft', serif;
     color: #D4AF37;
     font-size: 2rem;
     font-weight: bold;
 }
 
+/* Header Actions (Login, Cadastro, Carrinho) */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.user-menu-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.user-greeting {
+    font-size: 0.85rem;
+    color: #333;
+    font-weight: 400;
+}
+
+.user-subtext {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.user-link {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.user-link:hover {
+    color: #D4AF37;
+    text-decoration: underline;
+}
+
+/* Banner Promocional */
+.promo-banner {
+    position: sticky;
+    top: var(--header-height, 80px);
+    z-index: 1001;
+    width: 100%;
+    overflow: visible;
+    min-height: 50px;
+}
+.promo-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px 0;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.promo-marquee {
+    display: inline-flex;
+    gap: 32px;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+    will-change: transform;
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.promo-natal-text {
+    font-family: 'Limelight', cursive;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+/* ================= Temas Sazonais ================= */
+/* Black Friday - Animações Intensas */
+.theme-blackfriday {
+    background-color: #0d0d0d !important;
+    color: #f2f2f2 !important;
+    position: relative;
+    overflow-x: hidden;
+}
+.theme-blackfriday::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 30%, rgba(255,43,43,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255,43,43,0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+    animation: blackfridayGlow 4s ease-in-out infinite;
+}
+@keyframes blackfridayGlow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+.theme-blackfriday .header { 
+    background-color: #121212 !important; 
+    border-bottom: 1px solid #222 !important; 
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important;
+    animation: headerPulse 3s ease-in-out infinite;
+}
+@keyframes headerPulse {
+    0%, 100% { box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 rgba(255,43,43,0); }
+    50% { box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 30px rgba(255,43,43,0.3); }
+}
+.theme-blackfriday .logo h1 { 
+    color: #ff2b2b !important; 
+    text-shadow: 0 0 10px rgba(255,0,0,.5), 0 0 20px rgba(255,0,0,.3);
+    animation: logoPulse 2s ease-in-out infinite;
+}
+@keyframes logoPulse {
+    0%, 100% { text-shadow: 0 0 10px rgba(255,0,0,.5), 0 0 20px rgba(255,0,0,.3); }
+    50% { text-shadow: 0 0 20px rgba(255,0,0,.8), 0 0 40px rgba(255,0,0,.5); }
+}
+.theme-blackfriday .btn-primary { 
+    background-color: #ff2b2b; 
+    color: #0d0d0d; 
+    border-color: #ff2b2b;
+    animation: buttonShimmer 3s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+.theme-blackfriday .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+@keyframes buttonShimmer {
+    0%, 100% { box-shadow: 0 0 10px rgba(255,43,43,0.5); }
+    50% { box-shadow: 0 0 20px rgba(255,43,43,0.8), 0 0 30px rgba(255,43,43,0.4); }
+}
+.theme-blackfriday .btn-primary:hover { 
+    background-color: #0d0d0d; 
+    color: #ff2b2b; 
+    border-color: #ff2b2b;
+    transform: scale(1.05);
+}
+.theme-blackfriday .section,
+.theme-blackfriday .footer,
+.theme-blackfriday .contact-section,
+.theme-blackfriday .quem-somos-section { 
+    background: linear-gradient(135deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%) !important;
+    position: relative;
+}
+.theme-blackfriday .quem-somos-section::before { 
+    background: radial-gradient(circle at 20% 50%, rgba(255,43,43,.2) 0%, transparent 50%), 
+                radial-gradient(circle at 80% 50%, rgba(255,43,43,.2) 0%, transparent 50%) !important;
+    animation: sectionGlow 5s ease-in-out infinite;
+}
+@keyframes sectionGlow {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+.theme-blackfriday .section-title,
+.theme-blackfriday .chapter-title,
+.theme-blackfriday .story-paragraph,
+.theme-blackfriday .nav a,
+.theme-blackfriday .footer-column h3,
+.theme-blackfriday .footer-column a { color: #f2f2f2 !important; }
+.theme-blackfriday .story-main-title {
+    color: #f2f2f2 !important;
+}
+.theme-blackfriday .brand-highlight {
+    color: #ff2b2b !important;
+    text-shadow: 0 0 10px rgba(255,43,43,.5) !important;
+}
+.theme-blackfriday .chapter-number { 
+    color: #ff2b2b !important; 
+    opacity: .4;
+    animation: numberPulse 2s ease-in-out infinite;
+}
+@keyframes numberPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+}
+.theme-blackfriday .chapter-icon { 
+    background: linear-gradient(135deg,#ff2b2b 0%, #9b0d0d 100%) !important; 
+    box-shadow: 0 5px 20px rgba(255,43,43,.4) !important;
+    animation: iconGlow 2s ease-in-out infinite;
+    border-color: #ff2b2b !important;
+}
+@keyframes iconGlow {
+    0%, 100% { box-shadow: 0 5px 20px rgba(255,43,43,.4), 0 0 0 rgba(255,43,43,0); }
+    50% { box-shadow: 0 5px 20px rgba(255,43,43,.6), 0 0 30px rgba(255,43,43,.5); }
+}
+.theme-blackfriday .chapter-content { 
+    background: #1a1a1a !important; 
+    border-left-color: #ff2b2b !important;
+    border-left-width: 4px;
+    transition: all 0.3s ease;
+    color: #f2f2f2 !important;
+}
+.theme-blackfriday .chapter-content:hover {
+    border-left-width: 6px;
+    box-shadow: 0 10px 30px rgba(255,43,43,.3);
+    background: #1f1f1f !important;
+}
+.theme-blackfriday .chapter-title {
+    color: #ff2b2b !important;
+    text-shadow: 0 0 8px rgba(255,43,43,.3);
+}
+.theme-blackfriday .story-paragraph {
+    color: #e0e0e0 !important;
+}
+.theme-blackfriday .highlight-word {
+    color: #ff2b2b !important;
+    text-shadow: 0 0 6px rgba(255,43,43,.4);
+}
+.theme-blackfriday .highlight-word:hover {
+    color: #ff7a7a !important;
+    text-shadow: 0 0 10px rgba(255,43,43,.6);
+}
+.theme-blackfriday .timeline-container::before {
+    background: linear-gradient(to bottom, 
+        transparent 0%,
+        #ff2b2b 10%,
+        #ff2b2b 90%,
+        transparent 100%
+    ) !important;
+}
+.theme-blackfriday .impact-quote {
+    background: linear-gradient(135deg, #ff2b2b 0%, #9b0d0d 100%) !important;
+    box-shadow: 0 20px 50px rgba(255,43,43,.4) !important;
+}
+.theme-blackfriday .quote-text {
+    color: #0d0d0d !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+}
+.theme-blackfriday .gold-text {
+    color: #0d0d0d !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+}
+.theme-blackfriday .dress-image-container { 
+    border-color: #333 !important;
+    position: relative;
+    overflow: visible;
+}
+.theme-blackfriday .dress-image-container::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid #ff2b2b;
+    border-radius: 10px;
+    opacity: 0;
+    animation: borderPulse 2s ease-in-out infinite;
+}
+@keyframes borderPulse {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.02); }
+}
+.theme-blackfriday .promo-banner .promo-content { 
+    background: linear-gradient(90deg, #ff2b2b, #ff7a7a, #ff2b2b);
+    background-size: 200% 100%;
+    color: #0d0d0d; 
+    text-transform: uppercase;
+    animation: bannerShimmer 3s linear infinite;
+    font-weight: 900;
+    letter-spacing: 2px;
+    min-height: 50px;
+    overflow: hidden;
+}
+.theme-blackfriday .promo-marquee {
+    padding: 0;
+    margin: 0;
+}
+.theme-blackfriday .promo-marquee span {
+    display: inline-block;
+}
+@keyframes bannerShimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+.theme-blackfriday .dress-item { 
+    position: relative;
+    animation: itemFloat 3s ease-in-out infinite;
+}
+@keyframes itemFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+.theme-blackfriday .dress-item::before {
+    content: 'BLACK FRIDAY';
+    position: absolute;
+    top: 10px; 
+    left: -40px; 
+    transform: rotate(-45deg);
+    background: linear-gradient(135deg, #ff2b2b, #ff0000);
+    color: #0d0d0d; 
+    font-weight: 900;
+    padding: 6px 50px; 
+    letter-spacing: 1px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,.35), 0 0 20px rgba(255,43,43,.5); 
+    z-index: 2;
+    animation: badgePulse 1.5s ease-in-out infinite;
+}
+@keyframes badgePulse {
+    0%, 100% { transform: rotate(-45deg) scale(1); box-shadow: 0 4px 10px rgba(0,0,0,.35), 0 0 20px rgba(255,43,43,.5); }
+    50% { transform: rotate(-45deg) scale(1.05); box-shadow: 0 4px 15px rgba(0,0,0,.5), 0 0 30px rgba(255,43,43,.8); }
+}
+.theme-blackfriday .cart-button { color: #f2f2f2; }
+.theme-blackfriday .cart-button:hover { 
+    color: #ff2b2b;
+    transform: scale(1.1);
+}
+.theme-blackfriday .cart-count { 
+    background-color: #ff2b2b; 
+    color: #0d0d0d;
+    animation: countPulse 1s ease-in-out infinite;
+}
+@keyframes countPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Natal - Animações Mágicas Intensas */
+.theme-natal { 
+    background: linear-gradient(180deg, #fff, #fff7f7, #e9fff0) !important;
+    position: relative;
+    overflow-x: hidden;
+}
+.theme-natal::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(194,29,29,0.08) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(15,123,45,0.08) 0%, transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(255,215,0,0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 1;
+    animation: natalGlow 6s ease-in-out infinite;
+}
+@keyframes natalGlow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+.theme-natal .header { 
+    background: linear-gradient(90deg, #c21d1d, #0f7b2d);
+    animation: headerSparkle 4s ease-in-out infinite;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+@keyframes headerSparkle {
+    0%, 100% { box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+    50% { box-shadow: 0 4px 30px rgba(255,215,0,0.3), 0 0 40px rgba(15,123,45,0.2); }
+}
+.theme-natal .nav a { 
+    color: #fff !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+.theme-natal .nav a:hover { 
+    color: #FFD700 !important;
+    text-shadow: 0 0 10px rgba(255,215,0,0.8);
+    transform: translateY(-2px);
+}
+.theme-natal .logo h1 { 
+    color: #fff !important; 
+    text-shadow: 0 0 8px rgba(255,255,255,.6), 0 0 16px rgba(255,215,0,.4);
+    animation: logoSparkle 3s ease-in-out infinite;
+}
+@keyframes logoSparkle {
+    0%, 100% { text-shadow: 0 0 8px rgba(255,255,255,.6), 0 0 16px rgba(255,215,0,.4); }
+    50% { text-shadow: 0 0 16px rgba(255,255,255,.9), 0 0 30px rgba(255,215,0,.7); }
+}
+.theme-natal .btn-primary { 
+    background: linear-gradient(135deg, #0f7b2d, #0a5d23);
+    border-color: #0f7b2d; 
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    animation: buttonSparkle 3s ease-in-out infinite;
+}
+.theme-natal .btn-primary::before {
+    content: '✨';
+    position: absolute;
+    top: 50%;
+    left: -20px;
+    transform: translateY(-50%);
+    animation: sparkleMove 2s linear infinite;
+    font-size: 1.2rem;
+}
+@keyframes sparkleMove {
+    0% { left: -20px; opacity: 0; }
+    50% { opacity: 1; }
+    100% { left: calc(100% + 20px); opacity: 0; }
+}
+@keyframes buttonSparkle {
+    0%, 100% { box-shadow: 0 4px 15px rgba(15,123,45,0.4); }
+    50% { box-shadow: 0 4px 25px rgba(15,123,45,0.6), 0 0 30px rgba(255,215,0,0.3); }
+}
+.theme-natal .btn-primary:hover { 
+    background: linear-gradient(135deg, #c21d1d, #a01818);
+    border-color: #c21d1d; 
+    color: #fff;
+    transform: scale(1.05);
+}
+.theme-natal .promo-banner .promo-content { 
+    background: repeating-linear-gradient(45deg, rgba(194,29,29,0.85) 0 12px, rgba(15,123,45,0.85) 12px 24px),
+                linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.2) 100%);
+    color: #fff; 
+    text-shadow: 0 2px 8px rgba(0,0,0,.6), 0 0 12px rgba(255,255,255,.3);
+    animation: bannerTwinkle 2s ease-in-out infinite;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    min-height: 50px;
+    overflow: hidden;
+    position: relative;
+}
+.theme-natal .promo-banner .promo-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.15);
+    pointer-events: none;
+}
+.theme-natal .promo-marquee {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+.theme-natal .promo-natal-text {
+    padding: 0 8px;
+    display: inline-block;
+    font-size: 1.05em;
+}
+@keyframes bannerTwinkle {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2); }
+}
+.theme-natal .section-title, 
+.theme-natal .chapter-title { 
+    color: #0f7b2d;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: titleShimmer 4s ease-in-out infinite;
+}
+@keyframes titleShimmer {
+    0%, 100% { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    50% { text-shadow: 0 2px 8px rgba(15,123,45,0.3), 0 0 12px rgba(255,215,0,0.2); }
+}
+.theme-natal .highlight-word { 
+    color: #c21d1d;
+    animation: wordGlow 2s ease-in-out infinite;
+}
+@keyframes wordGlow {
+    0%, 100% { text-shadow: 0 0 0 rgba(194,29,29,0); }
+    50% { text-shadow: 0 0 8px rgba(194,29,29,0.5); }
+}
+.theme-natal .highlight-word.gold { 
+    color: #FFD700;
+    animation: goldSparkle 1.5s ease-in-out infinite;
+}
+@keyframes goldSparkle {
+    0%, 100% { text-shadow: 0 0 0 rgba(255,215,0,0), 0 2px 4px rgba(255,215,0,0.3); }
+    50% { text-shadow: 0 0 12px rgba(255,215,0,0.8), 0 2px 8px rgba(255,215,0,0.6); }
+}
+.theme-natal .footer { 
+    background: linear-gradient(180deg, #faf7f7, #fff);
+}
+.theme-natal .dress-item { 
+    position: relative;
+    animation: itemFloatNatal 4s ease-in-out infinite;
+}
+@keyframes itemFloatNatal {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(1deg); }
+    75% { transform: translateY(-4px) rotate(-1deg); }
+}
+.theme-natal .dress-item::before {
+    content: '🎁 OFERTAS DE NATAL';
+    position: absolute;
+    top: 10px; 
+    left: -34px; 
+    transform: rotate(-45deg);
+    background: linear-gradient(135deg, #0f7b2d, #0a5d23);
+    color: #fff; 
+    font-weight: 800;
+    padding: 6px 46px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,.2), 0 0 20px rgba(15,123,45,.4); 
+    z-index: 2;
+    animation: badgeSparkle 2s ease-in-out infinite;
+}
+@keyframes badgeSparkle {
+    0%, 100% { 
+        transform: rotate(-45deg) scale(1); 
+        box-shadow: 0 4px 10px rgba(0,0,0,.2), 0 0 20px rgba(15,123,45,.4); 
+    }
+    50% { 
+        transform: rotate(-45deg) scale(1.05); 
+        box-shadow: 0 4px 15px rgba(0,0,0,.3), 0 0 30px rgba(15,123,45,.6), 0 0 40px rgba(255,215,0,.3); 
+    }
+}
+.theme-natal .story-main-title::after {
+    content: '🎅';
+    margin-left: 10px; 
+    font-size: 1.2em; 
+    vertical-align: middle;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,.2));
+    animation: santaBounce 2s ease-in-out infinite;
+    display: inline-block;
+}
+@keyframes santaBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+}
+.theme-natal .dress-image-container {
+    position: relative;
+}
+.theme-natal .dress-image-container::after {
+    content: '✨';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    animation: starTwinkle 1.5s ease-in-out infinite;
+    z-index: 3;
+}
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+.theme-natal .chapter-icon {
+    animation: iconSparkle 3s ease-in-out infinite;
+}
+@keyframes iconSparkle {
+    0%, 100% { 
+        box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        transform: translateY(0);
+    }
+    50% { 
+        box-shadow: 0 5px 30px rgba(212, 175, 55, 0.6), 0 0 40px rgba(255,215,0,0.4);
+        transform: translateY(-5px);
+    }
+}
+
+/* Guirlanda/Pisca-pisca */
+.garland { position: fixed; top: 0; left: 0; width: 100%; height: 48px; display: flex; align-items: flex-end; justify-content: space-around; pointer-events: none; z-index: 10000; }
+.garland .bulb { width: 14px; height: 22px; border-radius: 50% 50% 45% 45%; background: #ff3b3b; box-shadow: 0 0 12px rgba(255, 0, 0, 0.8); animation: blink 1.2s infinite; }
+.garland .bulb:nth-child(3n+1) { background: #2ecc71; box-shadow: 0 0 12px rgba(46,204,113,.8); animation-delay: .2s; }
+.garland .bulb:nth-child(3n+2) { background: #FFD700; box-shadow: 0 0 12px rgba(255,215,0,.8); animation-delay: .4s; }
+@keyframes blink { 0%,100% { opacity:.3; transform: translateY(0);} 50%{ opacity:1; transform: translateY(3px);} }
 .nav ul {
     display: flex;
     list-style: none;
@@ -64,6 +630,16 @@ body {
     padding: 4rem 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
+.theme-blackfriday .hero {
+    background: linear-gradient(135deg, #161616 0%, #0e0e0e 100%) !important;
+}
+.theme-blackfriday .hero-text h2 {
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+.theme-blackfriday .hero-text p {
+    color: #e6e6e6 !important;
+}
 
 .hero-content {
     display: grid;
@@ -73,6 +649,7 @@ body {
 }
 
 .hero-text h2 {
+    font-family: 'Limelight', cursive;
     font-size: 3rem;
     font-weight: bold;
     color: #333;
@@ -80,6 +657,7 @@ body {
 }
 
 .hero-text p {
+    font-family: 'Bad Script', cursive;
     font-size: 1.2rem;
     color: #666;
     font-style: italic;
@@ -569,6 +1147,217 @@ body {
     background-color: #f8f9fa;
 }
 
+/* Modal de Configurações */
+.settings-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10002;
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+.settings-modal.visible { opacity: 1; }
+.settings-modal-dialog {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.settings-card {
+    width: 100%;
+    max-width: 500px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    transform: translateY(10px);
+    animation: modalPop .25s ease-out forwards;
+}
+.settings-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #eee;
+    background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+    border-radius: 16px 16px 0 0;
+}
+.settings-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+.settings-body {
+    padding: 24px;
+}
+.settings-section {
+    margin-bottom: 20px;
+}
+.settings-section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 16px;
+}
+.theme-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.theme-option-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    width: 100%;
+}
+.theme-option-btn:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.theme-blackfriday-btn:hover {
+    border-color: #ff2b2b;
+    background: linear-gradient(135deg, #ff2b2b15 0%, #ff7a7a15 100%);
+}
+.theme-natal-btn:hover {
+    border-color: #0f7b2d;
+    background: linear-gradient(135deg, #0f7b2d15 0%, #c21d1d15 100%);
+}
+.theme-default-btn:hover {
+    border-color: #D4AF37;
+    background: linear-gradient(135deg, #D4AF3715 0%, #FFD70015 100%);
+}
+.theme-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+.theme-name {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+.theme-desc {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Estilos dos temas no modal */
+.theme-blackfriday .settings-card {
+    background: #151515 !important;
+    border: 1px solid #2a2a2a;
+}
+.theme-blackfriday .settings-header {
+    background: linear-gradient(135deg, #ff2b2b 0%, #9b0d0d 100%) !important;
+}
+.theme-blackfriday .settings-title {
+    color: #0d0d0d !important;
+}
+.theme-blackfriday .settings-section-title {
+    color: #f2f2f2 !important;
+}
+.theme-blackfriday .theme-option-btn {
+    background: #1d1d1d !important;
+    border-color: #333 !important;
+    color: #f2f2f2 !important;
+}
+.theme-blackfriday .theme-name {
+    color: #f2f2f2 !important;
+}
+.theme-blackfriday .theme-desc {
+    color: #999 !important;
+}
+.theme-blackfriday .close-modal {
+    color: #0d0d0d !important;
+}
+
+.theme-natal .settings-card {
+    border: 2px solid #0f7b2d;
+}
+.theme-natal .settings-header {
+    background: linear-gradient(135deg, #c21d1d 0%, #0f7b2d 100%) !important;
+}
+.theme-natal .settings-title {
+    color: #fff !important;
+}
+.theme-natal .close-modal {
+    color: #fff !important;
+}
+
+/* Responsividade do modal de configurações */
+@media (max-width: 768px) {
+    .settings-card {
+        max-width: 90%;
+    }
+    .theme-option-btn {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .theme-icon {
+        font-size: 1.5rem;
+    }
+}
+
+.login-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10002;
+    opacity: 0;
+    transition: opacity .2s ease;
+}
+.login-modal.visible { opacity: 1; }
+.login-modal-dialog {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+    transform: translateY(10px);
+    animation: modalPop .25s ease-out forwards;
+}
+@keyframes modalPop {
+    from { opacity: 0; transform: translateY(20px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.login-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+}
+.login-title {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+.login-body {
+    padding: 20px;
+}
+
 .contact-content {
     max-width: 600px;
     margin: 0 auto;
@@ -658,6 +1447,181 @@ body {
     color: #fff;
 }
 
+/* ================= Temas Sazonais ================= */
+/* Black Friday: forte contraste escuro, logo vermelho e banner chamativo */
+.theme-blackfriday {
+    background-color: #0d0d0d !important;
+    color: #f2f2f2 !important;
+}
+.theme-blackfriday .header {
+    background-color: #121212 !important;
+    border-bottom: 1px solid #222 !important;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5) !important;
+}
+.theme-blackfriday .logo h1 {
+    color: #ff2b2b !important;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+.theme-blackfriday .btn-primary {
+    background-color: #ff2b2b;
+    color: #0d0d0d;
+    border-color: #ff2b2b;
+}
+.theme-blackfriday .btn-primary:hover {
+    background-color: #0d0d0d;
+    color: #ff2b2b;
+    border-color: #ff2b2b;
+}
+/* Estilos duplicados removidos - usando os estilos mais completos acima */
+.theme-blackfriday .user-greeting,
+.theme-blackfriday .user-subtext,
+.theme-blackfriday .user-link {
+    color: #ffffff !important;
+}
+.theme-blackfriday .user-link:hover {
+    color: #ff2b2b !important;
+    text-decoration: underline;
+}
+/* Estilos duplicados removidos - usando os estilos mais completos acima */
+.theme-blackfriday .cart-button { color: #f2f2f2; }
+.theme-blackfriday .cart-button:hover { color: #ff2b2b; }
+.theme-blackfriday .cart-count {
+    background-color: #ff2b2b;
+    color: #0d0d0d;
+}
+
+/* Carrinho - Black Friday */
+.theme-blackfriday .cart-modal-content {
+    background-color: #151515 !important;
+    color: #f2f2f2 !important;
+}
+.theme-blackfriday .cart-header {
+    background: linear-gradient(90deg, #9b0d0d 0%, #ff2b2b 100%) !important;
+}
+.theme-blackfriday .cart-title { color: #ffffff !important; }
+.theme-blackfriday .cart-footer { background-color: #1d1d1d !important; }
+.theme-blackfriday .address-section { background-color: #1d1d1d !important; border-color: #2a2a2a !important; }
+.theme-blackfriday .address-input,
+.theme-blackfriday .discount-input {
+    background-color: #222 !important;
+    color: #f2f2f2 !important;
+    border-color: #333 !important;
+}
+.theme-blackfriday .btn-apply-discount {
+    background-color: #ff2b2b !important;
+    color: #0d0d0d !important;
+}
+.theme-blackfriday .btn-checkout {
+    background-color: #ff2b2b !important;
+    color: #0d0d0d !important;
+}
+.theme-blackfriday .close-modal { color: #ffffff !important; }
+/* Modal de login no tema Black Friday */
+.theme-blackfriday .login-card {
+    background: #151515 !important;
+    color: #f2f2f2 !important;
+    border: 1px solid #2a2a2a;
+}
+.theme-blackfriday .login-header { border-bottom-color: #2a2a2a; }
+.theme-blackfriday .login-title { color: #ff2b2b !important; text-shadow: 0 0 6px rgba(255,43,43,.35); }
+.theme-blackfriday .btn-auth { background:#ff2b2b; border:2px solid #ff2b2b; color:#0d0d0d; }
+.theme-blackfriday .btn-auth:hover { background:#0d0d0d; color:#ff2b2b; }
+
+/* Estilos adicionais do tema Natal (complementares) */
+.theme-natal .close-modal { color: #ffffff !important; }
+.theme-natal .user-greeting,
+.theme-natal .user-subtext,
+.theme-natal .user-link { color: #ffffff !important; }
+.theme-natal .user-link:hover { color: #FFD700 !important; text-decoration: underline; }
+
+/* Carrinho - Natal */
+.theme-natal .cart-header {
+    background: linear-gradient(90deg, #c21d1d 0%, #0f7b2d 100%) !important;
+}
+.theme-natal .cart-title { color: #ffffff !important; }
+.theme-natal .btn-checkout {
+    background-color: #0f7b2d !important;
+    color: #ffffff !important;
+}
+.theme-natal .btn-apply-discount {
+    background-color: #c21d1d !important;
+    color: #ffffff !important;
+}
+
+/* ===== Neve (Tema Natal) ===== */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999; /* Acima de quase tudo, mas abaixo dos modais (10002) */
+    overflow: hidden;
+}
+.snowflake {
+    position: absolute;
+    top: -10px;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,0.1));
+    border-radius: 50%;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 4px rgba(255,255,255,0.6));
+    will-change: transform, opacity;
+}
+@keyframes snow-fall {
+    0%   { 
+        transform: translateY(-10px) translateX(0); 
+        opacity: 0; 
+    }
+    10%  { 
+        opacity: 1; 
+    }
+    50% {
+        transform: translateY(55vh) translateX(calc(var(--sway-x, 0px) * 0.5));
+    }
+    100% { 
+        transform: translateY(110vh) translateX(var(--sway-x, 0px)); 
+        opacity: 0.9; 
+    }
+}
+/* Guirlanda/Pisca-pisca */
+.garland {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    pointer-events: none;
+    /* Fica atrás do header para não cobrir o menu */
+    z-index: 100;
+}
+.garland .bulb {
+    width: 14px;
+    height: 22px;
+    border-radius: 50% 50% 45% 45%;
+    background: #ff3b3b;
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.8);
+    animation: blink 1.2s infinite;
+}
+.garland .bulb:nth-child(3n+1) {
+    background: #2ecc71;
+    box-shadow: 0 0 12px rgba(46, 204, 113, 0.8);
+    animation-delay: .2s;
+}
+.garland .bulb:nth-child(3n+2) {
+    background: #FFD700;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+    animation-delay: .4s;
+}
+@keyframes blink {
+    0%, 100% { opacity: .3; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(3px); }
+}
 /* Responsividade */
 @media (max-width: 768px) {
     .header .container {
@@ -1150,6 +2114,30 @@ body {
 }
 
 /* Estilos para Carrinho */
+.settings-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.settings-button:hover {
+    color: #D4AF37;
+    transform: rotate(90deg);
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+.settings-button svg {
+    width: 24px;
+    height: 24px;
+}
+
 .cart-button {
     position: relative;
     background: none;
@@ -1391,6 +2379,74 @@ body {
     color: #cccccc !important;
 }
 
+/* Temas nas páginas de autenticação */
+.theme-blackfriday .auth-section {
+    background: linear-gradient(135deg,#161616 0%, #0e0e0e 100%) !important;
+}
+.theme-blackfriday .auth-card {
+    background: #151515 !important;
+    border-color: #2a2a2a !important;
+}
+.theme-blackfriday .auth-title { color: #ffffff !important; }
+.theme-blackfriday .auth-subtitle { color: #cccccc !important; }
+.theme-blackfriday .btn-auth { background:#ff2b2b; border:2px solid #ff2b2b; color:#0d0d0d; }
+.theme-blackfriday .btn-auth:hover { background:#0d0d0d; color:#ff2b2b; }
+.theme-blackfriday .auth-link { color:#ff7a7a !important; }
+.theme-blackfriday .auth-link:hover { color:#ff2b2b !important; }
+
+/* Modal de Login - Tema Natal */
+.theme-natal .login-modal {
+    background: rgba(0,0,0,0.7) !important;
+}
+.theme-natal .login-card {
+    background: linear-gradient(135deg, #fff 0%, #fff7f7 100%) !important;
+    border: 2px solid #0f7b2d;
+    box-shadow: 0 20px 60px rgba(15,123,45,0.3), 0 0 40px rgba(255,215,0,0.2) !important;
+}
+.theme-natal .login-header {
+    background: linear-gradient(135deg, #c21d1d 0%, #0f7b2d 100%) !important;
+    border-bottom: 2px solid #FFD700;
+}
+.theme-natal .login-title {
+    color: #fff !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.theme-natal .login-body input {
+    border-color: #0f7b2d !important;
+}
+.theme-natal .login-body input:focus {
+    border-color: #FFD700 !important;
+    box-shadow: 0 0 10px rgba(255,215,0,0.3) !important;
+}
+.theme-natal .btn-auth { 
+    background: linear-gradient(135deg, #0f7b2d, #0a5d23) !important;
+    border: 2px solid #0f7b2d !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px rgba(15,123,45,0.4) !important;
+}
+.theme-natal .btn-auth:hover { 
+    background: linear-gradient(135deg, #c21d1d, #a01818) !important;
+    border-color: #c21d1d !important;
+    box-shadow: 0 4px 25px rgba(194,29,29,0.6), 0 0 30px rgba(255,215,0,0.3) !important;
+    transform: translateY(-2px);
+}
+.theme-natal .auth-link { 
+    color: #0f7b2d !important;
+    font-weight: 600;
+}
+.theme-natal .auth-link:hover { 
+    color: #c21d1d !important;
+    text-decoration: underline;
+}
+
+/* Estilos para páginas de autenticação (cadastro.html) */
+.theme-natal .auth-section {
+    background: linear-gradient(135deg,#e9fff0 0%, #fff7f7 100%) !important;
+}
+.theme-natal .auth-card {
+    border-color:#0f7b2d !important;
+    border-width: 2px;
+}
 .dark-mode .cart-modal-content {
     background-color: #2d2d2d !important;
 }
