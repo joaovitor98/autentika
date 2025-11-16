@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - AutêntikA</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <h1><a href="index.html" style="text-decoration: none; color: inherit;">AutêntikA</a></h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="index.html#novidades">Novidades</a></li>
+                <li><a href="index.html#destaques">Ofertas</a></li>
+                <li><a href="index.html#quemsomos">Quem Somos</a></li>
+                <li><a href="index.html#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="user-menu-text">
+                <span class="user-greeting">Olá, <span id="userNameDisplay">Usuário</span></span>
+                <span class="user-subtext"><a href="perfil.html" class="user-link">Meu Perfil</a> | <a href="#" class="user-link" onclick="logout()">Sair</a></span>
+            </div>
+            <button class="cart-button" onclick="openCartModal()">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Perfil Section -->
+<section class="section profile-section">
+    <div class="container">
+        <div class="profile-layout">
+            <!-- Menu Lateral -->
+            <aside class="profile-sidebar">
+                <div class="sidebar-greeting">
+                    <div class="user-icon">👤</div>
+                    <p class="greeting-text">olá, aqui é a sua conta:)</p>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#cadastro" class="sidebar-item active" data-section="cadastro">
+                        <span class="sidebar-item-title">cadastro</span>
+                        <span class="sidebar-item-desc">ver e alterar seus dados e seu e-mail</span>
+                    </a>
+                    <a href="#enderecos" class="sidebar-item" data-section="enderecos">
+                        <span class="sidebar-item-title">endereços</span>
+                        <span class="sidebar-item-desc">ver e alterar seus endereços</span>
+                    </a>
+                    <a href="#pedidos" class="sidebar-item" data-section="pedidos">
+                        <span class="sidebar-item-title">pedidos</span>
+                        <span class="sidebar-item-desc">acompanhar envio, ver nota fiscal</span>
+                    </a>
+                    <a href="#autenticacao" class="sidebar-item" data-section="autenticacao">
+                        <span class="sidebar-item-title">autenticação</span>
+                        <span class="sidebar-item-desc">definir ou alterar senha e gerenciar sessões</span>
+                    </a>
+                    <a href="#favoritos" class="sidebar-item" data-section="favoritos">
+                        <span class="sidebar-item-title">favoritos</span>
+                        <span class="sidebar-item-desc">ver os produtos que você favoritou</span>
+                    </a>
+                    <a href="#" class="sidebar-item" onclick="logout(); return false;">
+                        <span class="sidebar-item-title">sair</span>
+                        <span class="sidebar-item-desc">deslogar da conta e encerrar sessão</span>
+                    </a>
+                </nav>
+            </aside>
+
+            <!-- Conteúdo Principal -->
+            <main class="profile-main">
+                <!-- Seção Cadastro -->
+                <div id="cadastro-section" class="profile-section-content active">
+                    <h2 class="section-main-title">cadastro</h2>
+                    <div class="profile-main-layout">
+                        <div class="profile-info-card">
+                            <form id="profileForm" class="profile-form">
+                                <div class="form-row-profile">
+                                    <div class="form-group">
+                                        <label for="profileName">nome</label>
+                                        <input type="text" id="profileName" name="nome" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profileSurname">sobrenome</label>
+                                        <input type="text" id="profileSurname" name="sobrenome" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profileEmail">email</label>
+                                    <input type="email" id="profileEmail" name="email" placeholder="">
+                                </div>
+                                <div class="form-row-profile">
+                                    <div class="form-group">
+                                        <label for="profileCpf">cpf</label>
+                                        <input type="text" id="profileCpf" name="cpf" placeholder="" maxlength="14">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profileGender">gênero</label>
+                                        <select id="profileGender" name="genero" class="form-select">
+                                            <option value="">Selecione</option>
+                                            <option value="feminino">Feminino</option>
+                                            <option value="masculino">Masculino</option>
+                                            <option value="outro">Outro</option>
+                                            <option value="prefiro-nao-informar">Prefiro não informar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row-profile">
+                                    <div class="form-group">
+                                        <label for="profileBirthdate">data de nascimento</label>
+                                        <input type="date" id="profileBirthdate" name="dataNascimento" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="profilePhone">telefone</label>
+                                        <input type="tel" id="profilePhone" name="telefone" placeholder="(00) 00000-0000" maxlength="15">
+                                    </div>
+                                </div>
+                                <a href="#" class="edit-link" id="editProfileBtn">editar</a>
+                                <button type="submit" class="btn-primary btn-profile" id="saveProfileBtn" style="display: none;">Salvar Alterações</button>
+                            </form>
+                        </div>
+
+                        <!-- Card de Preferências de Mensagens -->
+                        <div class="messages-preference-card">
+                            <h3 class="messages-card-title">Recebimento de mensagens</h3>
+                            <p class="messages-card-desc">Quero receber novidades, lançamentos e promoções pelos seguintes canais:</p>
+                            <div class="messages-options">
+                                <label class="message-option">
+                                    <input type="checkbox" id="smsPreference" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="option-text">Por SMS</span>
+                                </label>
+                                <label class="message-option">
+                                    <input type="checkbox" id="whatsappPreference" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="option-text">Por Whatsapp</span>
+                                </label>
+                                <label class="message-option">
+                                    <input type="checkbox" id="emailPreference" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="option-text">Por e-mail</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção Endereços -->
+                <div id="enderecos-section" class="profile-section-content">
+                    <h2 class="section-main-title">endereços</h2>
+                    <div class="profile-card">
+                        <div class="card-header">
+                            <h3 class="card-title">Meus Endereços</h3>
+                            <a href="endereco.html" class="btn-secondary">+ Adicionar Endereço</a>
+                        </div>
+                        <div id="enderecosList" class="enderecos-list">
+                            <p class="empty-message">Carregando endereços...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção Pedidos -->
+                <div id="pedidos-section" class="profile-section-content">
+                    <h2 class="section-main-title">pedidos</h2>
+                    <div class="profile-card">
+                        <p class="empty-message">Nenhum pedido encontrado.</p>
+                    </div>
+                </div>
+
+                <!-- Seção Autenticação -->
+                <div id="autenticacao-section" class="profile-section-content">
+                    <h2 class="section-main-title">autenticação</h2>
+                    <div class="profile-card">
+                        <h3 class="card-title">Alterar Senha</h3>
+                        <form id="passwordForm" class="profile-form">
+                            <div class="form-group">
+                                <label for="currentPassword">Senha Atual:</label>
+                                <input type="password" id="currentPassword" name="senhaAtual" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">Nova Senha:</label>
+                                <input type="password" id="newPassword" name="novaSenha" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirmar Nova Senha:</label>
+                                <input type="password" id="confirmPassword" name="confirmarSenha" required>
+                            </div>
+                            <button type="submit" class="btn-primary btn-profile">Alterar Senha</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Seção Favoritos -->
+                <div id="favoritos-section" class="profile-section-content">
+                    <h2 class="section-main-title">favoritos</h2>
+                    <div class="profile-card">
+                        <p class="empty-message">Nenhum produto favoritado ainda.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Institucional</h3>
+                <ul>
+                    <li><a href="#">Políticas de privacidade</a></li>
+                    <li><a href="#">Sobre a AutêntikA</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Ajuda e Suporte</h3>
+                <ul>
+                    <li><a href="#">Segurança</a></li>
+                    <li><a href="#">Dúvidas frequentes</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Atendimento</h3>
+                <ul>
+                    <li><a href="#">Entre em contato</a></li>
+                    <li><a href="#">Lojas parceiras</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Mídias Sociais</h3>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path d="M20.52 3.48A11.88 11.88 0 0 0 12 0C5.373 0 .01 5.373 0 12a11.86 11.86 0 0 0 2.25 6.62L0 24l5.57-1.7A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.2-1.25-6.2-3.48-8.52zM12 21.5a9.47 9.47 0 0 1-4.85-1.33l-.35-.21-3.31.99.94-3.23-.23-.34A9.5 9.5 0 1 1 21.5 12 9.47 9.47 0 0 1 12 21.5z"/>
+                    <path d="M17.24 14.1c-.29-.15-1.71-.84-1.98-.94-.27-.11-.47-.15-.67.15s-.77.94-.95 1.13c-.18.19-.36.21-.67.07a5.52 5.52 0 0 1-2.05-1.27 7.15 7.15 0 0 1-1.33-1.65c-.14-.27 0-.41.11-.55.11-.11.27-.29.41-.43.14-.15.18-.27.27-.45.09-.18 0-.34-.05-.48-.07-.15-.67-1.62-.92-2.23-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.34-.28.27-1.06 1.04-1.06 2.54s1.09 2.96 1.24 3.17c.15.2 2.14 3.33 5.18 4.67 3.04 1.34 3.04.9 3.59.84.55-.06 1.79-.73 2.04-1.43.25-.7.25-1.3.18-1.43-.07-.14-.27-.22-.57-.37z"/>
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17" cy="7" r="1.2" fill="currentColor"></circle>
+                </svg>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/script.js"></script>
+<script src="js/perfil.js"></script>
+<script>
+    // Atualiza o header quando a página carregar
+    document.addEventListener('DOMContentLoaded', function() {
+        updateLoginStatus();
+    });
+</script>
+</body>
+</html>
+

@@ -670,8 +670,54 @@ function addStoryChapterAnimations() {
     }
 }
 
+// Função para verificar e atualizar status de login no header
+function updateLoginStatus() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const usuarioStr = localStorage.getItem('usuario');
+    const headerActions = document.querySelector('.header-actions .user-menu-text');
+    
+    if (headerActions) {
+        if (isLoggedIn && usuarioStr) {
+            try {
+                const usuario = JSON.parse(usuarioStr);
+                const userName = usuario.nome || 'Usuário';
+                
+                // Atualiza o header para mostrar que está logado
+                headerActions.innerHTML = `
+                    <span class="user-greeting">Olá, <span id="userNameDisplay">${userName}</span></span>
+                    <span class="user-subtext"><a href="perfil.html" class="user-link">Meu Perfil</a> | <a href="#" class="user-link" onclick="logout()">Sair</a></span>
+                `;
+            } catch (e) {
+                console.error('Erro ao parsear usuário:', e);
+                // Se houver erro, mostra opção de login
+                headerActions.innerHTML = `
+                    <span class="user-greeting">Olá, faça seu <a href="login.html" class="user-link">login</a></span>
+                    <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
+                `;
+            }
+        } else {
+            // Se não estiver logado, mostra opção de login
+            headerActions.innerHTML = `
+                <span class="user-greeting">Olá, faça seu <a href="login.html" class="user-link">login</a></span>
+                <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
+            `;
+        }
+    }
+}
+
+// Função de logout (para ser usada no header)
+function logout() {
+    localStorage.removeItem('usuarioId');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('isLoggedIn');
+    window.location.href = 'index.html';
+}
+
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function () {
+    // Atualiza status de login no header
+    updateLoginStatus();
+    
     // Inicializa as imagens dos vestidos
     initializeDressImages();
 

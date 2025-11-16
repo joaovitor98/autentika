@@ -1990,4 +1990,744 @@ body {
     }
 }
 
+/* Estilos para Página de Perfil */
+.profile-section {
+    margin-top: 80px;
+    padding: 2rem 0;
+    min-height: calc(100vh - 200px);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.profile-layout {
+    display: flex;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Sidebar */
+.profile-sidebar {
+    width: 300px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 15px;
+    padding: 2rem 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9ecef;
+    height: fit-content;
+}
+
+.sidebar-greeting {
+    padding: 0 2rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    border: 2px solid #e9ecef;
+}
+
+.greeting-text {
+    font-family: 'Yusei Magic', sans-serif;
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0 1rem;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    position: relative;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-item:hover {
+    background: #f8f9fa;
+}
+
+.sidebar-item.active {
+    background: #fffef5;
+    border-left-color: #D4AF37;
+}
+
+.sidebar-item-title {
+    font-family: 'Yusei Magic', sans-serif;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.sidebar-item.active .sidebar-item-title {
+    color: #D4AF37;
+}
+
+.sidebar-item-desc {
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.3;
+}
+
+/* Conteúdo Principal */
+.profile-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile-section-content {
+    display: none;
+}
+
+.profile-section-content.active {
+    display: block;
+}
+
+.section-main-title {
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 2rem;
+    text-transform: lowercase;
+}
+
+.profile-main-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.profile-info-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9ecef;
+}
+
+.profile-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.profile-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9ecef;
+}
+
+.card-title {
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #D4AF37;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #D4AF37;
+}
+
+.card-header .card-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-row-profile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.profile-form .form-group {
+    margin-bottom: 0;
+}
+
+.profile-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 0.95rem;
+    text-transform: lowercase;
+}
+
+.profile-form input[type="text"],
+.profile-form input[type="email"],
+.profile-form input[type="tel"],
+.profile-form input[type="date"],
+.profile-form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Yusei Magic', sans-serif;
+    transition: border-color 0.3s ease;
+    background: white;
+}
+
+.profile-form input:focus,
+.profile-form select:focus {
+    outline: none;
+    border-color: #D4AF37;
+}
+
+.profile-form input:disabled {
+    background: #f8f9fa;
+    cursor: not-allowed;
+}
+
+.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 35px;
+}
+
+.edit-link {
+    color: #D4AF37;
+    text-decoration: none;
+    font-family: 'Yusei Magic', sans-serif;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    display: inline-block;
+    transition: color 0.3s ease;
+    text-transform: lowercase;
+}
+
+.edit-link:hover {
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+/* Card de Preferências de Mensagens */
+.messages-preference-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e9ecef;
+    height: fit-content;
+}
+
+.messages-card-title {
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.messages-card-desc {
+    font-family: 'Yusei Magic', sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.messages-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.message-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-family: 'Yusei Magic', sans-serif;
+}
+
+.message-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #D4AF37;
+    flex-shrink: 0;
+}
+
+.option-text {
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.btn-profile {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.btn-secondary {
+    font-family: 'Yusei Magic', sans-serif;
+    background-color: #333;
+    color: #FFD700;
+    border: 2px solid #333;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    background-color: #FFD700;
+    color: #333;
+    transform: translateY(-2px);
+}
+
+.enderecos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.endereco-item {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid #e9ecef;
+    position: relative;
+}
+
+.endereco-item.principal {
+    border: 2px solid #D4AF37;
+    background: #fffef5;
+}
+
+.endereco-badge {
+    display: inline-block;
+    background: #D4AF37;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.endereco-info {
+    margin-bottom: 1rem;
+}
+
+.endereco-info p {
+    margin: 0.25rem 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.endereco-info strong {
+    color: #333;
+}
+
+.endereco-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-edit, .btn-delete {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-edit {
+    background: #D4AF37;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #FFD700;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
+
+.empty-message {
+    text-align: center;
+    color: #666;
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* Estilos para Formulário de Endereço */
+.input-with-button {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-with-button input {
+    flex: 1;
+}
+
+.input-with-button .btn-search-cep {
+    padding: 12px 20px;
+    white-space: nowrap;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Responsividade para Perfil */
+@media (max-width: 1200px) {
+    .profile-main-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 968px) {
+    .profile-layout {
+        flex-direction: column;
+    }
+
+    .profile-sidebar {
+        width: 100%;
+    }
+
+    .profile-content {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row-profile {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-section {
+        padding: 1.5rem 0;
+    }
+
+    .section-main-title {
+        font-size: 1.5rem;
+    }
+
+    .profile-info-card,
+    .messages-preference-card,
+    .profile-card {
+        padding: 1.5rem;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .card-header .btn-secondary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .input-with-button {
+        flex-direction: column;
+    }
+
+    .input-with-button .btn-search-cep {
+        width: 100%;
+    }
+
+    .sidebar-greeting {
+        padding: 0 1.5rem 1rem;
+    }
+
+    .sidebar-nav {
+        padding: 0 0.5rem;
+    }
+
+    .sidebar-item {
+        padding: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-main-title {
+        font-size: 1.3rem;
+    }
+
+    .profile-info-card,
+    .messages-preference-card,
+    .profile-card {
+        padding: 1rem;
+    }
+
+    .endereco-actions {
+        flex-direction: column;
+    }
+
+    .btn-edit, .btn-delete {
+        width: 100%;
+    }
+
+    .profile-main-layout {
+        gap: 1rem;
+    }
+}
+
+/* Melhorias de Responsividade Geral */
+@media (max-width: 968px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-text h2 {
+        font-size: 2.5rem;
+    }
+
+    .header .container {
+        flex-wrap: wrap;
+    }
+
+    .nav {
+        order: 3;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header .container {
+        padding: 1rem 15px;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .header-actions {
+        gap: 1rem;
+    }
+
+    .user-menu-text {
+        margin-right: 0;
+        padding-right: 0;
+        font-size: 0.8rem;
+    }
+
+    .hero {
+        padding: 2rem 0;
+    }
+
+    .hero-text h2 {
+        font-size: 2rem;
+    }
+
+    .hero-text p {
+        font-size: 1rem;
+    }
+
+    .placeholder-image {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: 4/3;
+    }
+
+    .section {
+        padding: 2rem 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    #destaques .dress-grid,
+    #novidades .dress-grid,
+    #tendencias .dress-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modo Escuro para Perfil */
+.dark-mode .profile-section {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%) !important;
+}
+
+.dark-mode .profile-sidebar,
+.dark-mode .profile-info-card,
+.dark-mode .messages-preference-card,
+.dark-mode .profile-card {
+    background: #2d2d2d !important;
+    border-color: #444 !important;
+}
+
+.dark-mode .sidebar-item {
+    color: #ffffff !important;
+}
+
+.dark-mode .sidebar-item:hover {
+    background: #3d3d3d !important;
+}
+
+.dark-mode .sidebar-item.active {
+    background: #3d3d1a !important;
+}
+
+.dark-mode .sidebar-item-title {
+    color: #ffffff !important;
+}
+
+.dark-mode .sidebar-item.active .sidebar-item-title {
+    color: #FFD700 !important;
+}
+
+.dark-mode .sidebar-item-desc {
+    color: #cccccc !important;
+}
+
+.dark-mode .greeting-text {
+    color: #cccccc !important;
+}
+
+.dark-mode .user-icon {
+    background: #3d3d3d !important;
+    border-color: #555 !important;
+}
+
+.dark-mode .section-main-title {
+    color: #ffffff !important;
+}
+
+.dark-mode .profile-form label {
+    color: #ffffff !important;
+}
+
+.dark-mode .profile-form input[type="text"],
+.dark-mode .profile-form input[type="email"],
+.dark-mode .profile-form input[type="tel"],
+.dark-mode .profile-form input[type="date"],
+.dark-mode .profile-form select {
+    background: #3d3d3d !important;
+    color: #ffffff !important;
+    border-color: #555 !important;
+}
+
+.dark-mode .profile-form input:focus,
+.dark-mode .profile-form select:focus {
+    border-color: #FFD700 !important;
+}
+
+.dark-mode .profile-form input:disabled {
+    background: #2d2d2d !important;
+}
+
+.dark-mode .messages-card-title {
+    color: #ffffff !important;
+}
+
+.dark-mode .messages-card-desc {
+    color: #cccccc !important;
+}
+
+.dark-mode .option-text {
+    color: #ffffff !important;
+}
+
+.dark-mode .card-title {
+    color: #ffffff !important;
+    border-bottom-color: #FFD700 !important;
+}
+
+.dark-mode .endereco-item {
+    background: #3d3d3d !important;
+    border-color: #555 !important;
+}
+
+.dark-mode .endereco-item.principal {
+    border-color: #FFD700 !important;
+    background: #3d3d1a !important;
+}
+
+.dark-mode .endereco-info p {
+    color: #cccccc !important;
+}
+
+.dark-mode .endereco-info strong {
+    color: #ffffff !important;
+}
+
+.dark-mode .empty-message {
+    color: #cccccc !important;
+}
+
 
