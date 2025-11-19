@@ -1,148 +1,162 @@
-# AutêntikA - Sistema de Autenticação
+# AutêntikA - Site de Vestidos
 
-Sistema de cadastro e login integrado com MongoDB usando Spring Boot.
+Este é o site da marca AutêntikA, desenvolvido como parte do projeto acadêmico do curso de Análise e Desenvolvimento de Sistemas.
 
-## Pré-requisitos
+## 🎯 Funcionalidades Principais
 
-- Java 17 ou superior
-- Maven 3.6 ou superior
-- MongoDB instalado e rodando (padrão: localhost:27017)
+### ✨ Vestidos Interativos
+- **9 quadrados clicáveis** representando diferentes tipos de vestidos
+- **Mudança de cor aleatória** a cada clique
+- **15 cores diferentes** disponíveis
+- **Animações suaves** e feedback visual
 
-## Configuração
+### 📱 Design Responsivo
+- Layout adaptável para desktop, tablet e mobile
+- Navegação suave entre seções
+- Efeitos visuais modernos
 
-### 1. Instalar e iniciar o MongoDB
+### 📞 Formulário de Contato
+- Validação de campos obrigatórios
+- Validação de e-mail
+- Feedback visual de envio
 
-Certifique-se de que o MongoDB está instalado e rodando na porta padrão (27017).
+## 🚀 Como Usar
 
-**Windows:**
-```bash
-# Inicie o MongoDB (se instalado como serviço, já estará rodando)
-# Ou execute manualmente:
-mongod
-```
+### 1. Abrir o Site
+- Abra o arquivo `index.html` em qualquer navegador moderno
+- Ou hospede em um servidor web
 
-**Linux/Mac:**
-```bash
-sudo systemctl start mongod
-# ou
-mongod
-```
+### 2. Navegar pelas Seções
+- Use os botões do menu: **Início**, **Novidades**, **Ofertas**, **Contato**
+- Ou clique em "Explorar Catálogo" na seção hero
 
-### 2. Configurar a conexão do MongoDB
+### 3. Interagir com os Vestidos
+- **Clique em qualquer quadrado** de vestido
+- **Veja a cor mudar** instantaneamente
+- **Experimente diferentes cores** clicando várias vezes
 
-O arquivo `src/main/resources/application.properties` já está configurado para:
-- Host: `localhost`
-- Porta: `27017`
-- Database: `autentika`
+### 4. Usar o Formulário
+- Preencha nome, e-mail e mensagem
+- Clique em "Enviar Mensagem"
+- Receba confirmação de envio
 
-Se necessário, altere essas configurações no arquivo `application.properties`.
+## 🎨 Cores dos Vestidos
 
-## Como executar
+O sistema inclui 15 cores diferentes:
+- Rosa claro, Rosa quente, Roxo
+- Salmão, Turquesa, Azul céu
+- Khaki, Ameixa, Trigo
+- Dourado, Tomate, Verde lima
+- Rosa profundo, Turquesa escuro, Orquídea
 
-### 1. Compilar o projeto
+## 🛠️ Tecnologias Utilizadas
 
-```bash
-mvn clean install
-```
+- **HTML5** - Estrutura semântica
+- **CSS3** - Estilização e responsividade
+- **JavaScript** - Interatividade e animações
+- **Design Responsivo** - Mobile-first approach
 
-### 2. Executar a aplicação
-
-```bash
-mvn spring-boot:run
-```
-
-Ou execute a classe `AutentikaApplication.java` diretamente no seu IDE.
-
-A aplicação estará disponível em: `http://localhost:8080`
-
-## Endpoints da API
-
-### Cadastro de Usuário
-- **URL:** `POST /api/auth/cadastro`
-- **Body:**
-```json
-{
-  "nome": "Nome do Usuário",
-  "email": "usuario@email.com",
-  "senhaHash": "senha123"
-}
-```
-
-### Login
-- **URL:** `POST /api/auth/login`
-- **Body:**
-```json
-{
-  "email": "usuario@email.com",
-  "password": "senha123"
-}
-```
-
-## Frontend
-
-As páginas HTML (`login.html` e `cadastro.html`) já estão configuradas para fazer requisições à API.
-
-### Para testar o frontend:
-
-1. Abra as páginas HTML em um navegador
-2. Certifique-se de que o servidor Spring Boot está rodando na porta 8080
-3. As páginas farão requisições para `http://localhost:8080/api/auth/...`
-
-**Nota:** Se você estiver abrindo os arquivos HTML diretamente (file://), pode haver problemas de CORS. Recomenda-se usar um servidor HTTP local ou configurar o navegador para permitir CORS.
-
-## Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
-autentika/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── org/example/
-│   │   │       ├── AutentikaApplication.java
-│   │   │       ├── config/
-│   │   │       │   └── CorsConfig.java
-│   │   │       ├── controller/
-│   │   │       │   ├── AuthController.java
-│   │   │       │   └── TesteController.java
-│   │   │       ├── model/
-│   │   │       │   └── Usuario.java
-│   │   │       ├── repository/
-│   │   │       │   └── UsuarioRepository.java
-│   │   │       └── service/
-│   │   │           └── UsuarioService.java
-│   │   └── resources/
-│   │       └── application.properties
-│   └── test/
-├── cadastro.html
-├── login.html
-├── index.html
-└── pom.xml
+AutêntikA/
+├── index.html          # Página principal
+├── styles.css          # Estilos e layout
+├── script.js           # Funcionalidades JavaScript
+└── README.md           # Este arquivo
 ```
 
-## Segurança
+## 🎯 Seções do Site
 
-- As senhas são criptografadas usando BCrypt antes de serem salvas no banco de dados
-- A senha nunca é retornada nas respostas da API
-- Validações de email e senha são realizadas tanto no frontend quanto no backend
+### 1. **Header**
+- Logo da marca "AutêntikA"
+- Menu de navegação com 4 botões
 
-## Troubleshooting
+### 2. **Hero Section**
+- Título principal: "Eleve seu estilo"
+- Subtítulo e botão de ação
+- Área para imagem principal
 
-### Erro de conexão com MongoDB
-- Verifique se o MongoDB está rodando: `mongosh` ou `mongo`
-- Verifique a porta e host no `application.properties`
+### 3. **Destaques**
+- 3 vestidos: Casual, Festa, Formal
 
-### Erro de CORS
-- O CORS já está configurado para permitir todas as origens
-- Se ainda houver problemas, verifique a configuração em `CorsConfig.java`
+### 4. **Lançamentos**
+- 3 vestidos: Curto, Longo, Tubinho
 
-### Porta 8080 já em uso
-- Altere a porta no `application.properties`: `server.port=8081`
-- Atualize as URLs nas páginas HTML também
+### 5. **Tendências**
+- 3 vestidos: Babydoll, Midi, Slip Dress
 
-## Desenvolvido com
+### 6. **Contato**
+- Formulário funcional
+- Validação de dados
 
-- Spring Boot 3.2.0
-- Spring Data MongoDB
-- BCrypt para hash de senhas
-- MongoDB
+### 7. **Footer**
+- Links institucionais
+- Redes sociais
+- Informações de contato
 
+## 🔧 Personalização
+
+### Alterar Cores dos Vestidos
+No arquivo `script.js`, modifique o array `dressColors`:
+
+```javascript
+const dressColors = [
+    '#SUA_COR_1',
+    '#SUA_COR_2',
+    // ... adicione mais cores
+];
+```
+
+### Modificar Textos
+Edite diretamente no arquivo `index.html` os textos das seções.
+
+### Ajustar Layout
+Modifique o arquivo `styles.css` para alterar:
+- Cores do tema
+- Tamanhos dos elementos
+- Espaçamentos
+- Fontes
+
+## 📱 Recursos Extras
+
+- **Modo Escuro** - Botão no canto superior direito
+- **Animações de Scroll** - Efeitos ao rolar a página
+- **Efeito Parallax** - Movimento suave no hero
+- **Contador de Cliques** - Rastreia interações
+- **Navegação Suave** - Scroll animado entre seções
+
+## 🎓 Objetivos Acadêmicos
+
+Este projeto atende aos objetivos do trabalho acadêmico:
+- ✅ Site estático funcional
+- ✅ 4 páginas/seções principais
+- ✅ Navegação consistente
+- ✅ Formulário de contato
+- ✅ Acessibilidade básica
+- ✅ Design responsivo
+- ✅ Publicação via GitHub Pages
+
+## 🚀 Próximos Passos
+
+Para evolução futura do projeto:
+1. **CSS Externo Avançado** - Melhorar identidade visual
+2. **JavaScript Interativo** - Adicionar carrossel e filtros
+3. **Integração E-commerce** - Carrinho e checkout
+4. **Blog/Novidades** - Sistema de posts
+5. **Analytics** - Métricas de uso
+
+## 👥 Equipe
+
+- **Scrum Master**: Gabriel Lucas
+- **Back-end**: João Vitor
+- **Front-end**: Matheus Santos
+- **Resultados**: David Marinho
+- **Cronograma**: Alex Alves
+- **Gestão de Riscos**: Túlio Rocha
+- **Comunicação**: Thiago Renovato
+- **Padrões**: Wesley Santiago
+
+---
+
+**Desenvolvido com ❤️ para a marca AutêntikA**

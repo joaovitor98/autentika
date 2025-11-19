@@ -1,9 +1,481 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Autentika</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <title>AutêntikA - Eleve seu estilo</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-   <body>
+<body>
+<!-- Header -->
+<header class="header" role="banner">
+    <div class="container header-row">
+        <button id="menuToggleBtn" class="menu-toggle" aria-label="Abrir menu" aria-controls="mainNav" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"></path></svg>
+        </button>
+        <div class="logo">
+            <h1><a href="index.html" style="text-decoration: none; color: inherit;">AutêntikA</a></h1>
+        </div>
+        <nav id="mainNav" class="nav" role="navigation" aria-label="Categorias">
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#novidades">Novidades</a></li>
+                <li><a href="#destaques">Ofertas</a></li>
+                <li><a href="#quemsomos">Quem Somos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <div class="header-actions">
+            <div class="user-menu-text">
+                <span class="user-greeting">Olá, faça seu <a href="login.html" class="user-link">login</a></span>
+                <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
+            </div>
+            <button class="settings-button" id="openSettingsModal" title="Configurações" aria-label="Abrir configurações">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
+                    <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5a3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97c0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1c0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/>
+                </svg>
+            </button>
+            <button class="cart-button" onclick="openCartModal()" aria-label="Abrir carrinho">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
+                    <path d="M7 4h-2l-1 2h-2v2h2l3.6 7.59-1.35 2.41c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2h-11.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.49c.75 0 1.41-.41 1.75-1.06l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1h-14zM7 20c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
+        </div>
+    </div>
+
+</header>
+
+<!-- Banner Promocional Dinâmico -->
+<div id="promoBanner" class="promo-banner" style="display:none;">
+    <div class="promo-content" id="promoContent"></div>
+</div>
+
+<!-- Modal de Configurações -->
+<div id="settingsModal" class="settings-modal">
+    <div class="settings-modal-dialog">
+        <div class="settings-card">
+            <div class="settings-header">
+                <h3 class="settings-title">Configurações</h3>
+                <button class="close-modal" onclick="closeSettingsModal()">&times;</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-section">
+                    <h4 class="settings-section-title">Temas Sazonais</h4>
+                    <div class="theme-options">
+                        <button id="btnBlackFriday" class="theme-option-btn theme-blackfriday-btn" onclick="applyTheme('blackfriday')">
+                            <span class="theme-icon">🛍️</span>
+                            <span class="theme-name">Black Friday</span>
+                            <span class="theme-desc">Descontos imperdíveis!</span>
+                        </button>
+                        <button id="btnNatal" class="theme-option-btn theme-natal-btn" onclick="applyTheme('natal')">
+                            <span class="theme-icon">🎄</span>
+                            <span class="theme-name">Natal</span>
+                            <span class="theme-desc">Espírito natalino!</span>
+                        </button>
+                        <button class="theme-option-btn theme-default-btn" onclick="applyTheme('default')">
+                            <span class="theme-icon">✨</span>
+                            <span class="theme-name">Tema Padrão</span>
+                            <span class="theme-desc">Voltar ao normal</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<section id="inicio" class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h2>Eleve seu estilo</h2>
+                <p>Encontre o vestido perfeito para cada momento!</p>
+                <button class="btn-primary" onclick="scrollToSection('destaques')">Explorar Catálogo</button>
+            </div>
+            <div class="hero-image">
+                <img src="hero-image.jpeg" alt="AutêntikA - Eleve seu estilo" class="hero-img">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Destaques Section -->
+<section id="destaques" class="section">
+    <div class="container">
+        <h2 class="section-title">Destaques</h2>
+        <div class="dress-grid">
+            <div class="dress-item" data-category="casual">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_1ifv551ifv551ifv.png" alt="Vestido Casual"
+                         class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Casual</p>
+            </div>
+            <div class="dress-item" data-category="festa">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_4g2iqz4g2iqz4g2i.png"
+                         alt="Vestido de Festa" class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Festa</p>
+            </div>
+            <div class="dress-item" data-category="formal">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_73qkoj73qkoj73qk.png" alt="Vestido Formal"
+                         class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Formal</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Lançamentos Section -->
+<section id="novidades" class="section">
+    <div class="container">
+        <h2 class="section-title">Lançamentos</h2>
+        <div class="dress-grid">
+            <div class="dress-item" data-category="curto">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_8ghmpe8ghmpe8ghm.png" alt="Vestido Curto"
+                         class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Curto</p>
+            </div>
+            <div class="dress-item" data-category="longo">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_8tt2gg8tt2gg8tt2.png" alt="Vestido Longo"
+                         class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Longo</p>
+            </div>
+            <div class="dress-item" data-category="tubinho">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_9tutw99tutw99tut.png" alt="Vestido Tubinho"
+                         class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Tubinho</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tendências Section -->
+<section id="tendencias" class="section">
+    <div class="container">
+        <h2 class="section-title">Tendências</h2>
+        <div class="dress-grid">
+            <div class="dress-item" data-category="babydoll">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_a6r4ssa6r4ssa6r4.png"
+                         alt="Vestido Babydoll" class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Babydoll</p>
+            </div>
+            <div class="dress-item" data-category="midi">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_at7oz4at7oz4at7o.png" alt="Vestido Midi"
+                         class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Midi</p>
+            </div>
+            <div class="dress-item" data-category="slip-dress">
+                <div class="dress-image-container" onclick="changeDressImage(this)">
+                    <img src="Gemini_Generated_Image_fvmd7kfvmd7kfvmd.png"
+                         alt="Vestido Slip Dress" class="dress-image">
+                    <div class="dress-overlay">
+                        <span class="change-text">Clique para trocar</span>
+                    </div>
+                </div>
+                <p class="dress-label">Slip Dress</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quem Somos Section -->
+<section id="quemsomos" class="section quem-somos-section">
+    <div class="container">
+        <h2 class="section-title story-main-title">Quem Somos — A História da <span
+                class="brand-highlight">Autêntica</span></h2>
+
+        <div class="quem-somos-content">
+            <!-- Timeline Visual -->
+            <div class="timeline-container">
+
+                <!-- Capítulo 1: O Início -->
+                <div class="story-chapter" data-chapter="1">
+                    <div class="chapter-number">01</div>
+                    <div class="chapter-content">
+                        <h3 class="chapter-title">O Começo de Tudo</h3>
+                        <p class="story-paragraph">
+                            A Autêntica nasceu de um <span class="highlight-word">sonho</span> simples, mas cheio de
+                            <span class="highlight-word">coragem</span> e <span
+                                class="highlight-word">determinação</span>.
+                            Há quatro anos, a fundadora vivia um momento de incerteza — havia deixado o emprego e, em
+                            uma cidade pequena, com poucas oportunidades, não sabia por onde recomeçar. Foi então que,
+                            com o incentivo da mãe e a ajuda generosa de uma vizinha costureira, deu os primeiros pontos
+                            de uma nova história.
+                        </p>
+                    </div>
+                    <div class="chapter-icon">✨</div>
+                </div>
+
+                <!-- Capítulo 2: A Descoberta -->
+                <div class="story-chapter" data-chapter="2">
+                    <div class="chapter-number">02</div>
+                    <div class="chapter-content">
+                        <h3 class="chapter-title">A Descoberta do Talento</h3>
+                        <p class="story-paragraph">
+                            Logo no primeiro dia em frente à máquina, descobriu um <span
+                                class="highlight-word">talento</span> que até então estava adormecido. No segundo, tomou
+                            a <span class="highlight-word">decisão</span> que mudaria o rumo da sua vida: investiu o
+                            único dinheiro que tinha na compra de sua primeira máquina de costura. A partir dali, cada
+                            costura era mais do que um trabalho — era a <span class="highlight-word">construção de um sonho</span>.
+                        </p>
+                    </div>
+                    <div class="chapter-icon">💫</div>
+                </div>
+
+                <!-- Capítulo 3: O Crescimento -->
+                <div class="story-chapter" data-chapter="3">
+                    <div class="chapter-number">03</div>
+                    <div class="chapter-content">
+                        <h3 class="chapter-title">Crescimento e Propósito</h3>
+                        <p class="story-paragraph">
+                            Durante o primeiro ano, trabalhou para outras pessoas, aprendeu novas técnicas, conquistou
+                            clientes e foi comprando novas máquinas, uma de cada vez. Com o tempo, a experiência e a
+                            <span class="highlight-word">paixão</span> pela costura se transformaram em <span
+                                class="highlight-word">propósito</span>. Assim surgiu a marca Autêntica, criada para
+                            representar não apenas roupas, mas histórias de <span
+                                class="highlight-word">superação</span>, <span
+                                class="highlight-word">independência</span> e <span class="highlight-word">amor</span>
+                            pelo que se faz.
+                        </p>
+                    </div>
+                    <div class="chapter-icon">🌟</div>
+                </div>
+
+                <!-- Capítulo 4: A Consolidação -->
+                <div class="story-chapter" data-chapter="4">
+                    <div class="chapter-number">04</div>
+                    <div class="chapter-content">
+                        <h3 class="chapter-title">Consolidação da Marca</h3>
+                        <p class="story-paragraph">
+                            Com o crescimento da marca, vieram novas conquistas: a contratação de uma equipe própria,
+                            com cortador e estilista, a abertura de uma loja de tecidos e a estruturação de uma produção
+                            completa. Hoje, três anos depois, a Autêntica se consolida como uma marca que valoriza o
+                            <span class="highlight-word">trabalho artesanal</span>, o cuidado em cada detalhe e a <span
+                                class="highlight-word">força da mulher empreendedora</span> que acredita no seu próprio
+                            talento.
+                        </p>
+                    </div>
+                    <div class="chapter-icon">👑</div>
+                </div>
+
+                <!-- Capítulo 5: O Futuro Digital -->
+                <div class="story-chapter story-chapter-final" data-chapter="5">
+                    <div class="chapter-number">05</div>
+                    <div class="chapter-content">
+                        <h3 class="chapter-title">O Futuro Digital</h3>
+                        <p class="story-paragraph">
+                            Agora, em uma <span class="highlight-word">nova fase</span>, a Autêntica amplia seus
+                            horizontes e chega ao <span class="highlight-word">mundo digital</span>.
+                            Nosso papel foi transformar toda essa trajetória em um site que transmite a essência da
+                            marca — <span class="highlight-word gold">autêntica</span>, <span
+                                class="highlight-word gold">criativa</span> e <span class="highlight-word gold">inspiradora</span>
+                            — refletindo cada ponto de costura que construiu essa história.
+                        </p>
+                    </div>
+                    <div class="chapter-icon">🚀</div>
+                </div>
+
+            </div>
+
+            <!-- Frase de Impacto Final -->
+            <div class="impact-quote">
+                <div class="quote-mark">"</div>
+                <p class="quote-text">
+                    Cada ponto, uma história.<br>
+                    Cada peça, <span class="gold-text">autêntica</span>.
+                </p>
+                <div class="quote-mark">"</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contato Section -->
+<section id="contato" class="section contact-section">
+    <div class="container">
+        <h2 class="section-title">Entre em Contato</h2>
+        <div class="contact-content">
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Institucional</h3>
+                <ul>
+                    <li><a href="#">Políticas de privacidade</a></li>
+                    <li><a href="#">Sobre a AutêntikA</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Ajuda e Suporte</h3>
+                <ul>
+                    <li><a href="#">Segurança</a></li>
+                    <li><a href="#">Dúvidas frequentes</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Atendimento</h3>
+                <ul>
+                    <li><a href="#">Entre em contato</a></li>
+                    <li><a href="#">Lojas parceiras</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Mídias Sociais</h3>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path d="M20.52 3.48A11.88 11.88 0 0 0 12 0C5.373 0 .01 5.373 0 12a11.86 11.86 0 0 0 2.25 6.62L0 24l5.57-1.7A11.93 11.93 0 0 0 12 24c6.627 0 12-5.373 12-12 0-3.2-1.25-6.2-3.48-8.52zM12 21.5a9.47 9.47 0 0 1-4.85-1.33l-.35-.21-3.31.99.94-3.23-.23-.34A9.5 9.5 0 1 1 21.5 12 9.47 9.47 0 0 1 12 21.5z"/>
+                    <path d="M17.24 14.1c-.29-.15-1.71-.84-1.98-.94-.27-.11-.47-.15-.67.15s-.77.94-.95 1.13c-.18.19-.36.21-.67.07a5.52 5.52 0 0 1-2.05-1.27 7.15 7.15 0 0 1-1.33-1.65c-.14-.27 0-.41.11-.55.11-.11.27-.29.41-.43.14-.15.18-.27.27-.45.09-.18 0-.34-.05-.48-.07-.15-.67-1.62-.92-2.23-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.34-.28.27-1.06 1.04-1.06 2.54s1.09 2.96 1.24 3.17c.15.2 2.14 3.33 5.18 4.67 3.04 1.34 3.04.9 3.59.84.55-.06 1.79-.73 2.04-1.43.25-.7.25-1.3.18-1.43-.07-.14-.27-.22-.57-.37z"/>
+                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="17" cy="7" r="1.2" fill="currentColor"></circle>
+                </svg>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>
+
+<!-- Modal de Produto -->
+<div id="productModal" class="product-modal">
+    <div class="product-modal-content">
+        <div class="product-modal-header">
+            <h3 class="product-modal-title">Detalhes do Produto</h3>
+            <button class="close-modal" onclick="closeProductModal()">&times;</button>
+        </div>
+        <div class="product-modal-body">
+            <div class="product-details">
+                <div class="product-image-section">
+                    <img id="productMainImage" src="" alt="Produto" class="product-main-image">
+                    <div class="color-variants">
+                        <div class="color-option active" data-color="original" style="background-color: #FFD700;"></div>
+                        <div class="color-option" data-color="red" style="background-color: #ff4444;"></div>
+                        <div class="color-option" data-color="blue" style="background-color: #4444ff;"></div>
+                    </div>
+                </div>
+                <div class="product-info-section">
+                    <h2 id="productName" class="product-name">Nome do Produto</h2>
+                    <div id="productPrice" class="product-price">R$ 0,00</div>
+                    <p id="productDescription" class="product-description">
+                        Descrição do produto será exibida aqui. Este é um produto de alta qualidade da AutêntikA.
+                    </p>
+                    <div class="product-actions">
+                        <button class="btn-add-cart" onclick="addToCart()">Adicionar ao Carrinho</button>
+                        <button class="btn-buy-now" onclick="buyNow()">Comprar Agora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal do Carrinho -->
+<div id="cartModal" class="cart-modal">
+    <div class="cart-modal-content">
+        <div class="cart-header">
+            <h3 class="cart-title">Carrinho de Compras</h3>
+            <button class="close-modal" onclick="closeCartModal()">&times;</button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <!-- Itens do carrinho serão inseridos aqui -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total" id="cartTotal">Total: R$ 0,00</div>
+
+            <!-- Seção de Endereço -->
+            <div class="address-section">
+                <h4>Endereço de Entrega</h4>
+                <div class="address-form">
+                    <div class="form-row">
+                        <input type="text" id="cepInput" class="address-input" placeholder="CEP" maxlength="9">
+                        <button class="btn-search-cep" onclick="searchCEPAddress()">Buscar</button>
+                    </div>
+                    <input type="text" id="streetInput" class="address-input" placeholder="Rua/Avenida" readonly>
+                    <div class="form-row">
+                        <input type="text" id="numberInput" class="address-input" placeholder="Número">
+                        <input type="text" id="complementInput" class="address-input" placeholder="Complemento">
+                    </div>
+                    <div class="form-row">
+                        <input type="text" id="neighborhoodInput" class="address-input" placeholder="Bairro" readonly>
+                        <input type="text" id="cityInput" class="address-input" placeholder="Cidade" readonly>
+                    </div>
+                    <input type="text" id="stateInput" class="address-input" placeholder="Estado" readonly>
+                </div>
+            </div>
+
+            <div class="discount-section">
+                <input type="text" id="discountCode" class="discount-input" placeholder="Código de desconto">
+                <button class="btn-apply-discount" onclick="applyDiscount()">Aplicar Desconto</button>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Finalizar Compra</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
 </body>
 </html>
