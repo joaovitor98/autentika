@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: autentika-backend
+    env: java
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/autentika-1.0-SNAPSHOT.jar
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: PORT
+        fromService:
+          type: web
+          name: autentika-backend
+          property: port
+      - key: ALLOWED_ORIGINS
+        sync: false
+
