@@ -2,18 +2,21 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
     <title>AutêntikA - Eleve seu estilo</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <!-- Header -->
-<header class="header">
-    <div class="container">
+<header class="header" role="banner">
+    <div class="container header-row">
+        <button id="menuToggleBtn" class="menu-toggle" aria-label="Abrir menu" aria-controls="mainNav" aria-expanded="false">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"></path></svg>
+        </button>
         <div class="logo">
             <h1><a href="index.html" style="text-decoration: none; color: inherit;">AutêntikA</a></h1>
         </div>
-        <nav class="nav">
+        <nav id="mainNav" class="nav" role="navigation" aria-label="Categorias">
             <ul>
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="#novidades">Novidades</a></li>
@@ -27,12 +30,15 @@
                 <span class="user-greeting">Olá, faça seu <a href="login.html" class="user-link">login</a></span>
                 <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
             </div>
-            <button class="cart-button" onclick="openCartModal()">
-                🛒
+            <button class="cart-button" onclick="openCartModal()" aria-label="Abrir carrinho">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
+                    <path d="M7 4h-2l-1 2h-2v2h2l3.6 7.59-1.35 2.41c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2h-11.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.49c.75 0 1.41-.41 1.75-1.06l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1h-14zM7 20c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                </svg>
                 <span class="cart-count" id="cartCount">0</span>
             </button>
         </div>
     </div>
+
 </header>
 
 <!-- Hero Section -->

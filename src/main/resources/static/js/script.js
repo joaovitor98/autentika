@@ -599,40 +599,46 @@ function addClickCounter() {
 
 // Função para adicionar modo escuro (bonus)
 function addDarkModeToggle() {
-    const darkModeToggle = document.createElement('button');
-    darkModeToggle.innerHTML = '🌙';
-    darkModeToggle.id = 'dark-mode-toggle';
-    darkModeToggle.style.cssText = `
-        position: fixed;
-        top: 15px;
-        right: 20px;
-        background: #333;
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        font-size: 20px;
-        cursor: pointer;
-        z-index: 9999;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    const headerActions = document.querySelector('.header-actions');
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'theme-toggle';
+    btn.setAttribute('aria-label', 'Alternar tema');
+    btn.setAttribute('aria-pressed', document.body.classList.contains('dark-mode') ? 'true' : 'false');
+    btn.innerHTML = `
+        <span class="icon-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" preserveAspectRatio="xMidYMid meet" focusable="false">
+                <circle cx="12" cy="12" r="5"></circle>
+                <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M1 12h3M20 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"></path>
+            </svg>
+        </span>
+        <span class="icon-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" preserveAspectRatio="xMidYMid meet" focusable="false">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </span>
     `;
-
-    document.body.appendChild(darkModeToggle);
-
-    darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        darkModeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-        darkModeToggle.style.background = document.body.classList.contains('dark-mode') ? '#FFD700' : '#333';
+    if (document.body.classList.contains('dark-mode')) {
+        btn.classList.add('is-dark');
+    }
+    if (headerActions) {
+        headerActions.appendChild(btn);
+    } else {
+        document.body.appendChild(btn);
+        btn.style.position = 'fixed';
+        btn.style.top = '15px';
+        btn.style.right = '20px';
+    }
+    btn.addEventListener('click', function () {
+        const isDark = document.body.classList.toggle('dark-mode');
+        btn.classList.toggle('is-dark', isDark);
+        btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
     });
-
-    darkModeToggle.addEventListener('mouseenter', () => {
-        darkModeToggle.style.transform = 'scale(1.1)';
-    });
-
-    darkModeToggle.addEventListener('mouseleave', () => {
-        darkModeToggle.style.transform = 'scale(1)';
+    btn.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+        }
     });
 }
 
@@ -713,10 +719,49 @@ function logout() {
     window.location.href = 'index.html';
 }
 
+function initResponsiveMenu() {
+    const nav = document.querySelector('.nav');
+    const toggle = document.getElementById('menuToggleBtn');
+    if (!nav || !toggle) return;
+
+    const openMenu = () => {
+        nav.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+        document.addEventListener('keydown', onKeyDown);
+    };
+    const closeMenu = () => {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        document.removeEventListener('keydown', onKeyDown);
+    };
+    const onKeyDown = (e) => {
+        if (e.key === 'Escape') closeMenu();
+        if ((e.key === 'Enter' || e.key === ' ') && document.activeElement === toggle) {
+            e.preventDefault(); toggle.click();
+        }
+    };
+
+    toggle.addEventListener('click', () => {
+        const isOpen = nav.classList.contains('open');
+        isOpen ? closeMenu() : openMenu();
+    });
+
+    nav.addEventListener('click', (e) => {
+        const target = e.target.closest('a');
+        if (target) closeMenu();
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 1024) closeMenu();
+    }, { passive: true });
+}
+
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function () {
     // Atualiza status de login no header
     updateLoginStatus();
+
+    initResponsiveMenu();
     
     // Inicializa as imagens dos vestidos
     initializeDressImages();
