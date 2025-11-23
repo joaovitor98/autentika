@@ -1,6 +1,6 @@
-# AutêntikA - Sistema de Autenticação
+# AutêntikA
 
-Sistema de cadastro e login integrado com MongoDB usando Spring Boot.
+Aplicação Java Spring Boot com integração ao MongoDB para autenticação de usuários e gerenciamento de endereços. Frontend estático em `src/main/resources/static` consumindo a API em `http://localhost:8080/api`.
 
 ## Pré-requisitos
 
@@ -57,38 +57,25 @@ A aplicação estará disponível em: `http://localhost:8080`
 
 ## Endpoints da API
 
-### Cadastro de Usuário
-- **URL:** `POST /api/auth/cadastro`
-- **Body:**
-```json
-{
-  "nome": "Nome do Usuário",
-  "email": "usuario@email.com",
-  "senhaHash": "senha123"
-}
-```
+### Autenticação
+- `POST /api/auth/cadastro`
+- `POST /api/auth/login`
 
-### Login
-- **URL:** `POST /api/auth/login`
-- **Body:**
-```json
-{
-  "email": "usuario@email.com",
-  "password": "senha123"
-}
-```
+### Endereços
+- `POST /api/enderecos`
+- `GET /api/enderecos/usuario/{usuarioId}`
+- `GET /api/enderecos/{id}`
+- `PUT /api/enderecos/{id}`
+- `DELETE /api/enderecos/{id}`
 
 ## Frontend
 
-As páginas HTML (`login.html` e `cadastro.html`) já estão configuradas para fazer requisições à API.
+As páginas HTML em `src/main/resources/static` estão configuradas para consumir a API em `http://localhost:8080/api`.
 
-### Para testar o frontend:
-
-1. Abra as páginas HTML em um navegador
-2. Certifique-se de que o servidor Spring Boot está rodando na porta 8080
-3. As páginas farão requisições para `http://localhost:8080/api/auth/...`
-
-**Nota:** Se você estiver abrindo os arquivos HTML diretamente (file://), pode haver problemas de CORS. Recomenda-se usar um servidor HTTP local ou configurar o navegador para permitir CORS.
+### Para testar o frontend
+- Abra os arquivos `index.html`, `login.html`, `cadastro.html`, `perfil.html` e `endereco.html`
+- Garanta que o servidor Spring Boot está ativo na porta configurada (`8080` por padrão)
+- Se abrir via `file://`, ative um servidor estático local para evitar restrições de CORS
 
 ## Estrutura do Projeto
 
@@ -103,21 +90,38 @@ autentika/
 │   │   │       │   └── CorsConfig.java
 │   │   │       ├── controller/
 │   │   │       │   ├── AuthController.java
-│   │   │       │   └── TesteController.java
+│   │   │       │   └── EnderecoController.java
 │   │   │       ├── model/
-│   │   │       │   └── Usuario.java
+│   │   │       │   ├── Usuario.java
+│   │   │       │   └── Endereco.java
 │   │   │       ├── repository/
-│   │   │       │   └── UsuarioRepository.java
+│   │   │       │   ├── UsuarioRepository.java
+│   │   │       │   └── EnderecoRepository.java
 │   │   │       └── service/
 │   │   │           └── UsuarioService.java
 │   │   └── resources/
-│   │       └── application.properties
+│   │       ├── application.properties
+│   │       └── static/
+│   │           ├── index.html
+│   │           ├── login.html
+│   │           ├── cadastro.html
+│   │           ├── perfil.html
+│   │           ├── endereco.html
+│   │           ├── js/
+│   │           └── css/
 │   └── test/
-├── cadastro.html
-├── login.html
-├── index.html
 └── pom.xml
 ```
+
+## Testes
+
+### Executar testes
+
+```bash
+mvn test
+```
+
+Os testes de integração validam a conexão com o MongoDB e as operações das APIs principais.
 
 ## Segurança
 

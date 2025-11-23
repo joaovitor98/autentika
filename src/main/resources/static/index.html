@@ -30,6 +30,11 @@
                 <span class="user-greeting">Olá, faça seu <a href="login.html" class="user-link">login</a></span>
                 <span class="user-subtext">ou <a href="cadastro.html" class="user-link">cadastre-se</a></span>
             </div>
+            <button class="settings-button" id="openSettingsModal" title="Configurações" aria-label="Abrir configurações">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
+                    <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5a3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97c0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1c0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66Z"/>
+                </svg>
+            </button>
             <button class="cart-button" onclick="openCartModal()" aria-label="Abrir carrinho">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" preserveAspectRatio="xMidYMid meet" focusable="false" aria-hidden="true">
                     <path d="M7 4h-2l-1 2h-2v2h2l3.6 7.59-1.35 2.41c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2h-11.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.49c.75 0 1.41-.41 1.75-1.06l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1h-14zM7 20c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
@@ -41,6 +46,45 @@
 
 </header>
 
+<!-- Banner Promocional Dinâmico -->
+<div id="promoBanner" class="promo-banner" style="display:none;">
+    <div class="promo-content" id="promoContent"></div>
+</div>
+
+<!-- Modal de Configurações -->
+<div id="settingsModal" class="settings-modal">
+    <div class="settings-modal-dialog">
+        <div class="settings-card">
+            <div class="settings-header">
+                <h3 class="settings-title">Configurações</h3>
+                <button class="close-modal" onclick="closeSettingsModal()">&times;</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-section">
+                    <h4 class="settings-section-title">Temas Sazonais</h4>
+                    <div class="theme-options">
+                        <button id="btnBlackFriday" class="theme-option-btn theme-blackfriday-btn" onclick="applyTheme('blackfriday')">
+                            <span class="theme-icon">🛍️</span>
+                            <span class="theme-name">Black Friday</span>
+                            <span class="theme-desc">Descontos imperdíveis!</span>
+                        </button>
+                        <button id="btnNatal" class="theme-option-btn theme-natal-btn" onclick="applyTheme('natal')">
+                            <span class="theme-icon">🎄</span>
+                            <span class="theme-name">Natal</span>
+                            <span class="theme-desc">Espírito natalino!</span>
+                        </button>
+                        <button class="theme-option-btn theme-default-btn" onclick="applyTheme('default')">
+                            <span class="theme-icon">✨</span>
+                            <span class="theme-name">Tema Padrão</span>
+                            <span class="theme-desc">Voltar ao normal</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Hero Section -->
 <section id="inicio" class="hero">
     <div class="container">
@@ -51,9 +95,7 @@
                 <button class="btn-primary" onclick="scrollToSection('destaques')">Explorar Catálogo</button>
             </div>
             <div class="hero-image">
-                <div class="placeholder-image">
-                    <p>Imagem do Hero</p>
-                </div>
+                <img src="./images/hero-image.jpeg" alt="AutêntikA - Eleve seu estilo" class="hero-img">
             </div>
         </div>
     </div>
@@ -66,30 +108,27 @@
         <div class="dress-grid">
             <div class="dress-item" data-category="casual">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_41_58.png" alt="Vestido Casual"
+                    <img src="./images/vestido 1 frente.jpg" alt="Vestido Casual"
                          class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Casual</p>
             </div>
             <div class="dress-item" data-category="festa">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_44_11.png"
+                    <img src="./images/vestido 2 frente.jpg"
                          alt="Vestido de Festa" class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Festa</p>
             </div>
             <div class="dress-item" data-category="formal">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_46_29.png" alt="Vestido Formal"
+                    <img src="./images/vestido 3 frente.jpg" alt="Vestido Formal"
                          class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Formal</p>
@@ -105,30 +144,27 @@
         <div class="dress-grid">
             <div class="dress-item" data-category="curto">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/Gemini_Generated_Image_wl9z4xwl9z4xwl9z.png" alt="Vestido Longo"
+                    <img src="./images/vestido 4 frente.jpg" alt="Vestido Curto"
                          class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Curto</p>
             </div>
             <div class="dress-item" data-category="longo">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/Gemini_Generated_Image_wl9z4xwl9z4xwl9z.png" alt="Vestido Longo"
+                    <img src="./images/vestido 5 frente.jpg" alt="Vestido Longo"
                          class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Longo</p>
             </div>
             <div class="dress-item" data-category="tubinho">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/Gemini_Generated_Image_wl9z4xwl9z4xwl9z%20(1).png" alt="Vestido Tubinho"
+                    <img src="./images/vestido 6 frente.jpg" alt="Vestido Tubinho"
                          class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Tubinho</p>
@@ -144,30 +180,27 @@
         <div class="dress-grid">
             <div class="dress-item" data-category="babydoll">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_41_58.png"
+                    <img src="./images/vestido 1 frente.jpg"
                          alt="Vestido Babydoll" class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Babydoll</p>
             </div>
             <div class="dress-item" data-category="midi">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_44_11.png" alt="Vestido Midi"
+                    <img src="./images/vestido 2 frente.jpg" alt="Vestido Midi"
                          class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Midi</p>
             </div>
             <div class="dress-item" data-category="slip-dress">
                 <div class="dress-image-container" onclick="changeDressImage(this)">
-                    <img src="images/ChatGPT%20Image%2015%20de%20out.%20de%202025,%2016_46_29.png"
+                    <img src="./images/vestido 3 frente.jpg"
                          alt="Vestido Slip Dress" class="dress-image">
                     <div class="dress-overlay">
-                        <span class="change-text">Clique para trocar</span>
                     </div>
                 </div>
                 <p class="dress-label">Slip Dress</p>
@@ -369,11 +402,6 @@
             <div class="product-details">
                 <div class="product-image-section">
                     <img id="productMainImage" src="" alt="Produto" class="product-main-image">
-                    <div class="color-variants">
-                        <div class="color-option active" data-color="original" style="background-color: #FFD700;"></div>
-                        <div class="color-option" data-color="red" style="background-color: #ff4444;"></div>
-                        <div class="color-option" data-color="blue" style="background-color: #4444ff;"></div>
-                    </div>
                 </div>
                 <div class="product-info-section">
                     <h2 id="productName" class="product-name">Nome do Produto</h2>

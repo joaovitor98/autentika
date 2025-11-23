@@ -1,12 +1,78 @@
-// Array de imagens disponíveis para os vestidos
-const dressImages = [
-    'ChatGPT Image 15 de out. de 2025, 16_41_58.png',
-    'ChatGPT Image 15 de out. de 2025, 16_44_11.png',
-    'ChatGPT Image 15 de out. de 2025, 16_46_29.png',
-    'Gemini_Generated_Image_hdspjuhdspjuhdsp.png',
-    'Gemini_Generated_Image_wl9z4xwl9z4xwl9z.png',
-    'Gemini_Generated_Image_wl9z4xwl9z4xwl9z (1).png'
-];
+// Estrutura de dados dos vestidos com suas fotos organizadas por posição
+const dressData = {
+    1: {
+        name: 'Vestido 1',
+        images: {
+            frente: './images/vestido 1 frente.jpg',
+            ladoDireito: './images/vestido 1 lado direito.jpg',
+            costas: './images/vestido 1 costas.jpg',
+            lado: './images/vestido 1 lado.jpg'
+        },
+        positions: ['frente', 'ladoDireito', 'costas', 'lado']
+    },
+    2: {
+        name: 'Vestido 2',
+        images: {
+            frente: './images/vestido 2 frente.jpg',
+            ladoDireito: './images/vestido 2 lado direito.jpg',
+            costas: './images/vestido 2 costas.jpg'
+        },
+        positions: ['frente', 'ladoDireito', 'costas']
+    },
+    3: {
+        name: 'Vestido 3',
+        images: {
+            frente: './images/vestido 3 frente.jpg',
+            ladoDireito: './images/vestido 3 lado direito.jpg',
+            costas: './images/vestido 3 costas.jpg'
+        },
+        positions: ['frente', 'ladoDireito', 'costas']
+    },
+    4: {
+        name: 'Vestido 4',
+        images: {
+            frente: './images/vestido 4 frente.jpg',
+            ladoDireito: './images/vestido 4 lado direito.jpg',
+            ladoEsquerdo: './images/vestido 4 lado esquerdo.jpg',
+            costas: './images/vestido 4 costas.jpg'
+        },
+        positions: ['frente', 'ladoDireito', 'ladoEsquerdo', 'costas']
+    },
+    5: {
+        name: 'Vestido 5',
+        images: {
+            frente: './images/vestido 5 frente.jpg',
+            ladoEsquerdo: './images/vesido 5 lado esquerdo.jpg',
+            costas: './images/vestido 5 costas.jpg'
+        },
+        positions: ['frente', 'ladoEsquerdo', 'costas']
+    },
+    6: {
+        name: 'Vestido 6',
+        images: {
+            frente: './images/vestido 6 frente.jpg',
+            ladoDireito: './images/vestido 6 lado direito.jpg',
+            ladoEsquerdo: './images/vestido 6 lado esquerdo.jpg'
+        },
+        positions: ['frente', 'ladoDireito', 'ladoEsquerdo']
+    }
+};
+
+// Mapeamento de categorias para vestidos (casual, festa, etc. -> vestido 1-6)
+const categoryToDress = {
+    'casual': 1,
+    'festa': 2,
+    'formal': 3,
+    'curto': 4,
+    'longo': 5,
+    'tubinho': 6,
+    'babydoll': 1,
+    'midi': 2,
+    'slip-dress': 3
+};
+
+// Armazena a posição atual de cada vestido
+const dressCurrentPosition = {};
 
 // Sistema de carrinho
 let cart = [];
@@ -38,20 +104,28 @@ const productDescriptions = {
     'slip-dress': 'Vestido slip dress minimalista e sofisticado, ideal para looks modernos.'
 };
 
-// Função para mudar a imagem do vestido
+// Função para mudar a posição do vestido (360 graus)
 function changeDressImage(element) {
+    const dressItem = element.closest('.dress-item');
+    const category = dressItem.getAttribute('data-category');
+    const dressNumber = categoryToDress[category] || 1;
+    const dress = dressData[dressNumber];
+
+    if (!dress) return;
+
     const img = element.querySelector('.dress-image');
-    const currentSrc = img.src;
 
-    // Encontra uma nova imagem diferente da atual
-    let newImageSrc;
-    do {
-        const randomIndex = Math.floor(Math.random() * dressImages.length);
-        newImageSrc = dressImages[randomIndex];
-    } while (newImageSrc === currentSrc.split('/').pop());
+    // Inicializa a posição atual se não existir
+    if (!dressCurrentPosition[dressNumber]) {
+        dressCurrentPosition[dressNumber] = 0;
+    }
 
-    // Aplica a nova imagem
-    img.src = newImageSrc;
+    // Avança para a próxima posição
+    dressCurrentPosition[dressNumber] = (dressCurrentPosition[dressNumber] + 1) % dress.positions.length;
+    const currentPosition = dress.positions[dressCurrentPosition[dressNumber]];
+
+    // Atualiza a imagem
+    img.src = dress.images[currentPosition];
 
     // Adiciona animação de feedback
     element.classList.add('clicked');
@@ -62,7 +136,7 @@ function changeDressImage(element) {
     }, 500);
 
     // Mostra feedback visual
-    showImageFeedback(element, newImageSrc);
+    showImageFeedback(element, dress.images[currentPosition]);
 }
 
 // Função para mostrar feedback visual da imagem selecionada
@@ -102,20 +176,76 @@ function openProductModal(element) {
     const category = element.closest('.dress-item').getAttribute('data-category');
     const imageSrc = element.querySelector('.dress-image').src;
     const productName = element.closest('.dress-item').querySelector('.dress-label').textContent;
+    const dressNumber = categoryToDress[category] || 1;
+    const dress = dressData[dressNumber];
+
+    let basePrice = productPrices[category] || 99.90;
+    let finalPrice = basePrice;
+    let discount = 0;
+    let discountPercent = 0;
+
+    // Verifica se está no modo Black Friday
+    if (document.body.classList.contains('theme-blackfriday')) {
+        // Descontos disponíveis: 30%, 20%, 10%
+        const discounts = [30, 20, 10];
+        // Seleciona um desconto aleatório
+        discountPercent = discounts[Math.floor(Math.random() * discounts.length)];
+        discount = (basePrice * discountPercent) / 100;
+        finalPrice = basePrice - discount;
+    }
+
+    // Inicializa a posição atual se não existir
+    if (!dressCurrentPosition[dressNumber]) {
+        dressCurrentPosition[dressNumber] = 0;
+    }
 
     currentProduct = {
         category: category,
         name: productName,
         image: imageSrc,
-        price: productPrices[category] || 99.90,
-        description: productDescriptions[category] || 'Produto de alta qualidade da AutêntikA.'
+        price: finalPrice,
+        originalPrice: basePrice,
+        discount: discount,
+        discountPercent: discountPercent,
+        description: productDescriptions[category] || 'Produto de alta qualidade da AutêntikA.',
+        dressNumber: dressNumber,
+        dress: dress
     };
 
     // Preenche o modal com os dados do produto
     document.getElementById('productMainImage').src = currentProduct.image;
     document.getElementById('productName').textContent = currentProduct.name;
-    document.getElementById('productPrice').textContent = `R$ ${currentProduct.price.toFixed(2).replace('.', ',')}`;
+
+    // Atualiza o preço com desconto se houver
+    const priceElement = document.getElementById('productPrice');
+    if (discountPercent > 0) {
+        priceElement.innerHTML = `
+            <span style="text-decoration: line-through; color: #999; font-size: 0.9em; margin-right: 10px;">
+                R$ ${basePrice.toFixed(2).replace('.', ',')}
+            </span>
+            <span style="color: #ff2b2b; font-weight: bold;">
+                R$ ${finalPrice.toFixed(2).replace('.', ',')}
+            </span>
+            <span style="display: block; color: #ff2b2b; font-size: 0.85em; margin-top: 5px;">
+                ${discountPercent}% OFF - BLACK FRIDAY!
+            </span>
+        `;
+    } else {
+        priceElement.textContent = `R$ ${finalPrice.toFixed(2).replace('.', ',')}`;
+    }
+
     document.getElementById('productDescription').textContent = currentProduct.description;
+
+    // Remove as opções de cores
+    const colorVariants = document.querySelector('.color-variants');
+    if (colorVariants) {
+        colorVariants.style.display = 'none';
+    }
+
+    // Adiciona indicador de clique na imagem
+    const productImage = document.getElementById('productMainImage');
+    productImage.style.cursor = 'pointer';
+    productImage.title = 'Clique para ver outras posições';
 
     // Mostra o modal
     document.getElementById('productModal').style.display = 'block';
@@ -128,52 +258,7 @@ function closeProductModal() {
     document.body.style.overflow = 'auto';
 }
 
-// Função para trocar cor do produto
-function changeProductColor(color) {
-    const colorOptions = document.querySelectorAll('.color-option');
-    colorOptions.forEach(option => option.classList.remove('active'));
-
-    const selectedOption = document.querySelector(`[data-color="${color}"]`);
-    if (selectedOption) {
-        selectedOption.classList.add('active');
-
-        // Aplica filtro de cor apenas no vestido (área específica da imagem)
-        const productImage = document.getElementById('productMainImage');
-
-        // Cria um overlay com a cor selecionada apenas na área do vestido
-        let overlay = productImage.parentElement.querySelector('.color-overlay');
-        if (!overlay) {
-            overlay = document.createElement('div');
-            overlay.className = 'color-overlay';
-            overlay.style.cssText = `
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 1;
-                border-radius: 10px;
-            `;
-            productImage.parentElement.style.position = 'relative';
-            productImage.parentElement.appendChild(overlay);
-        }
-
-        switch (color) {
-            case 'red':
-                overlay.style.background = 'linear-gradient(45deg, rgba(255, 68, 68, 0.3) 0%, rgba(255, 100, 100, 0.2) 50%, rgba(255, 68, 68, 0.3) 100%)';
-                overlay.style.mixBlendMode = 'multiply';
-                break;
-            case 'blue':
-                overlay.style.background = 'linear-gradient(45deg, rgba(68, 68, 255, 0.3) 0%, rgba(100, 100, 255, 0.2) 50%, rgba(68, 68, 255, 0.3) 100%)';
-                overlay.style.mixBlendMode = 'multiply';
-                break;
-            default:
-                overlay.style.background = 'none';
-                overlay.style.mixBlendMode = 'normal';
-        }
-    }
-}
+// Função removida - não usamos mais troca de cores
 
 // Função para adicionar ao carrinho
 function addToCart() {
@@ -435,12 +520,23 @@ function scrollToSection(sectionId) {
     }
 }
 
-// Função para inicializar imagens aleatórias nos vestidos
+// Função para inicializar imagens dos vestidos
 function initializeDressImages() {
     const dressContainers = document.querySelectorAll('.dress-image-container');
 
     dressContainers.forEach((container, index) => {
-        const img = container.querySelector('.dress-image');
+        const dressItem = container.closest('.dress-item');
+        const category = dressItem.getAttribute('data-category');
+        const dressNumber = categoryToDress[category] || 1;
+        const dress = dressData[dressNumber];
+
+        if (dress) {
+            // Inicializa com a primeira posição (frente)
+            dressCurrentPosition[dressNumber] = 0;
+            const img = container.querySelector('.dress-image');
+            const firstPosition = dress.positions[0];
+            img.src = dress.images[firstPosition];
+        }
 
         // Adiciona um pequeno delay para criar um efeito de "cascata"
         setTimeout(() => {
@@ -519,12 +615,12 @@ function addSmoothNavigation() {
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            
+
             // Se o link é para outra página (contém .html) ou não tem #, permite navegação normal
             if (href.includes('.html') || !href.includes('#')) {
                 return; // Permite navegação normal
             }
-            
+
             // Se é um link âncora na mesma página, faz scroll suave
             e.preventDefault();
             const targetId = href.substring(1);
@@ -630,7 +726,9 @@ function addDarkModeToggle() {
         btn.style.right = '20px';
     }
     btn.addEventListener('click', function () {
-        const isDark = document.body.classList.toggle('dark-mode');
+        const wantDark = !document.body.classList.contains('dark-mode');
+        window.setColorScheme(wantDark ? 'dark' : 'light');
+        const isDark = document.body.classList.contains('dark-mode');
         btn.classList.toggle('is-dark', isDark);
         btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
     });
@@ -681,13 +779,13 @@ function updateLoginStatus() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const usuarioStr = localStorage.getItem('usuario');
     const headerActions = document.querySelector('.header-actions .user-menu-text');
-    
+
     if (headerActions) {
         if (isLoggedIn && usuarioStr) {
             try {
                 const usuario = JSON.parse(usuarioStr);
                 const userName = usuario.nome || 'Usuário';
-                
+
                 // Atualiza o header para mostrar que está logado
                 headerActions.innerHTML = `
                     <span class="user-greeting">Olá, <span id="userNameDisplay">${userName}</span></span>
@@ -762,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function () {
     updateLoginStatus();
 
     initResponsiveMenu();
-    
+
     // Inicializa as imagens dos vestidos
     initializeDressImages();
 
@@ -801,14 +899,30 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Adiciona eventos para trocar cor do produto
-    const colorOptions = document.querySelectorAll('.color-option');
-    colorOptions.forEach(option => {
-        option.addEventListener('click', function () {
-            const color = this.getAttribute('data-color');
-            changeProductColor(color);
+    // Adiciona evento para mudar posição do vestido no modal
+    const productImage = document.getElementById('productMainImage');
+    if (productImage) {
+        productImage.addEventListener('click', function() {
+            if (currentProduct && currentProduct.dress) {
+                const dressNumber = currentProduct.dressNumber;
+                const dress = currentProduct.dress;
+
+                // Avança para a próxima posição
+                dressCurrentPosition[dressNumber] = (dressCurrentPosition[dressNumber] + 1) % dress.positions.length;
+                const currentPosition = dress.positions[dressCurrentPosition[dressNumber]];
+
+                // Atualiza a imagem no modal
+                this.src = dress.images[currentPosition];
+                currentProduct.image = dress.images[currentPosition];
+
+                // Adiciona efeito de transição
+                this.style.opacity = '0.7';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 200);
+            }
         });
-    });
+    }
 
     // Fecha modais ao clicar fora
     window.addEventListener('click', function (event) {
@@ -838,8 +952,513 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Inicializa o sistema de temas sazonais (Black Friday e Natal)
+    initializeThemeSwitcher();
+
     console.log('Site AutêntikA carregado com sucesso! 🎉');
 });
+
+// --------- Temas Sazonais (Black Friday e Natal) ----------
+function initializeThemeSwitcher() {
+    const savedTheme = localStorage.getItem('autentikaTheme');
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else {
+        applyTheme('default');
+    }
+
+    // Settings modal trigger
+    const openSettings = document.getElementById('openSettingsModal');
+    if (openSettings) {
+        openSettings.addEventListener('click', (e) => {
+            e.preventDefault();
+            openSettingsModal();
+        });
+    }
+}
+
+// Modal de Configurações
+function openSettingsModal() {
+    const modal = document.getElementById('settingsModal');
+    if (!modal) return;
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => modal.classList.add('visible'), 10);
+    window.addEventListener('keydown', escCloseSettings);
+    modal.addEventListener('click', outsideCloseSettings);
+    const scheme = getColorSchemePreference();
+    const lightBtn = document.getElementById('schemeLightBtn');
+    const darkBtn = document.getElementById('schemeDarkBtn');
+    if (lightBtn && darkBtn) {
+        lightBtn.classList.toggle('active', scheme === 'light');
+        darkBtn.classList.toggle('active', scheme === 'dark');
+    }
+}
+
+function closeSettingsModal() {
+    const modal = document.getElementById('settingsModal');
+    if (!modal) return;
+    modal.classList.remove('visible');
+    setTimeout(() => {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }, 200);
+    window.removeEventListener('keydown', escCloseSettings);
+    modal.removeEventListener('click', outsideCloseSettings);
+}
+
+function escCloseSettings(e) {
+    if (e.key === 'Escape') closeSettingsModal();
+}
+
+function outsideCloseSettings(e) {
+    if (e.target && e.target.id === 'settingsModal') {
+        closeSettingsModal();
+    }
+}
+
+function clearThemes() {
+    document.body.classList.remove('theme-blackfriday', 'theme-natal', 'dark-mode', 'theme-light');
+    const banner = document.getElementById('promoBanner');
+    if (banner) {
+        banner.style.display = 'none';
+        document.getElementById('promoContent').innerHTML = '';
+    }
+    // Remove guirlanda de natal se existir
+    const garland = document.getElementById('natal-garland');
+    if (garland && garland.parentElement) {
+        garland.parentElement.removeChild(garland);
+    }
+    // Remove neve se existir
+    const snow = document.getElementById('snow-container');
+    if (snow && snow.parentElement) {
+        snow.parentElement.removeChild(snow);
+    }
+    // Remove partículas do Black Friday se existir
+    const particles = document.getElementById('bf-particles');
+    if (particles && particles.parentElement) {
+        particles.parentElement.removeChild(particles);
+    }
+    // Remove estrelas de natal se existir
+    const stars = document.getElementById('natal-stars');
+    if (stars && stars.parentElement) {
+        stars.parentElement.removeChild(stars);
+    }
+}
+
+ 
+function getColorSchemePreference() {
+    const saved = localStorage.getItem('autentikaColorScheme');
+    return saved === 'dark' ? 'dark' : 'light';
+}
+
+function setColorSchemePreference(mode) {
+    localStorage.setItem('autentikaColorScheme', mode === 'dark' ? 'dark' : 'light');
+}
+
+function applySchemeForTheme(theme, scheme) {
+    if (theme === 'blackfriday') {
+        document.body.classList.add('theme-blackfriday');
+        showPromoBanner(`
+            <div class="promo-marquee">
+                <span>BLACK FRIDAY AUTÊNTIKA • DESCONTOS IMPERDÍVEIS • ATÉ 70% OFF • CORRA! • </span>
+                <span>BLACK FRIDAY AUTÊNTIKA • DESCONTOS IMPERDÍVEIS • ATÉ 70% OFF • CORRA! • </span>
+                <span>BLACK FRIDAY AUTÊNTIKA • DESCONTOS IMPERDÍVEIS • ATÉ 70% OFF • CORRA! • </span>
+                <span>BLACK FRIDAY AUTÊNTIKA • DESCONTOS IMPERDÍVEIS • ATÉ 70% OFF • CORRA! • </span>
+            </div>
+        `);
+        addBlackFridayParticles();
+    }
+
+    if (theme === 'natal') {
+        document.body.classList.add('theme-natal');
+        const natalText = 'Feliz Natal! Frete GRÁTIS e ofertas especiais 🎄✨';
+        showPromoBanner(`
+            <div class="promo-marquee">
+                <span class="promo-natal-text">${natalText} • </span>
+                <span class="promo-natal-text">${natalText} • </span>
+                <span class="promo-natal-text">${natalText} • </span>
+                <span class="promo-natal-text">${natalText} • </span>
+                <span class="promo-natal-text">${natalText} • </span>
+                <span class="promo-natal-text">${natalText} • </span>
+            </div>
+        `);
+        addChristmasGarland();
+        addSnow();
+        addNatalStars();
+    } else {
+    }
+
+    if (scheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.body.classList.remove('theme-light');
+    } else {
+        document.body.classList.add('theme-light');
+        document.body.classList.remove('dark-mode');
+    }
+}
+
+window.applyTheme = function(theme) {
+    console.log('Aplicando tema:', theme);
+    clearThemes();
+    const scheme = getColorSchemePreference();
+    applySchemeForTheme(theme, scheme);
+    localStorage.setItem('autentikaTheme', theme);
+    closeSettingsModal();
+};
+
+ 
+window.setColorScheme = function(mode) {
+    setColorSchemePreference(mode);
+    const currentTheme = localStorage.getItem('autentikaTheme') || 'default';
+    clearThemes();
+    const scheme = getColorSchemePreference();
+    applySchemeForTheme(currentTheme, scheme);
+    const lightBtn = document.getElementById('schemeLightBtn');
+    const darkBtn = document.getElementById('schemeDarkBtn');
+    if (lightBtn && darkBtn) {
+        lightBtn.classList.toggle('active', scheme === 'light');
+        darkBtn.classList.toggle('active', scheme === 'dark');
+    }
+};
+
+ 
+function runThemeTests() {
+    const results = [];
+    function assert(name, cond) { results.push(`${cond ? '✓' : '✗'} ${name}`); }
+
+    setColorSchemePreference('light');
+    clearThemes();
+    applySchemeForTheme('blackfriday', getColorSchemePreference());
+    assert('Black Friday respeita modo claro', document.body.classList.contains('theme-light') && !document.body.classList.contains('dark-mode'));
+    const bfGearLight = document.getElementById('openSettingsModal');
+    const bfUserTextLight = document.querySelector('.header-actions .user-menu-text');
+    if (bfGearLight && bfUserTextLight) {
+        const gearColor = getComputedStyle(bfGearLight).color;
+        const userColor = getComputedStyle(bfUserTextLight).color;
+        assert('Texto do usuário igual à cor do ícone (BF claro)', gearColor === userColor, `${gearColor} vs ${userColor}`);
+    }
+
+    setColorSchemePreference('dark');
+    clearThemes();
+    applySchemeForTheme('blackfriday', getColorSchemePreference());
+    assert('Black Friday respeita modo escuro', document.body.classList.contains('dark-mode') && !document.body.classList.contains('theme-light'));
+
+    setColorSchemePreference('light');
+    clearThemes();
+    applySchemeForTheme('natal', getColorSchemePreference());
+    assert('Natal respeita modo claro', document.body.classList.contains('theme-light') && !document.body.classList.contains('dark-mode'));
+
+    setColorSchemePreference('dark');
+    clearThemes();
+    applySchemeForTheme('natal', getColorSchemePreference());
+    assert('Natal respeita modo escuro', document.body.classList.contains('dark-mode') && !document.body.classList.contains('theme-light'));
+
+    setColorSchemePreference('dark');
+    clearThemes();
+    applySchemeForTheme('default', getColorSchemePreference());
+    assert('Modo escuro preservado fora de promoções', document.body.classList.contains('dark-mode'));
+
+    setColorSchemePreference('light');
+    clearThemes();
+    applySchemeForTheme('natal', getColorSchemePreference());
+    assert('Tema Natal respeita modo claro', document.body.classList.contains('theme-light'));
+
+    console.log('Theme tests:', results);
+}
+
+if (window.location.search.includes('themetest=1')) {
+    runThemeTests();
+}
+
+function parseColorToRGB(color) {
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.fillStyle = color;
+    const computed = ctx.fillStyle; // normaliza
+    const m = computed.match(/^#([0-9a-f]{6})$/i);
+    if (m) {
+        const hex = m[1];
+        return [
+            parseInt(hex.slice(0,2), 16),
+            parseInt(hex.slice(2,4), 16),
+            parseInt(hex.slice(4,6), 16)
+        ];
+    }
+    const rgb = computed.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
+    if (rgb) return [Number(rgb[1]), Number(rgb[2]), Number(rgb[3])];
+    return [0,0,0];
+}
+
+function relativeLuminance([r,g,b]) {
+    const srgb = [r,g,b].map(v => v/255).map(v => v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4));
+    return 0.2126*srgb[0] + 0.7152*srgb[1] + 0.0722*srgb[2];
+}
+
+function contrastRatio(c1, c2) {
+    const L1 = relativeLuminance(parseColorToRGB(c1));
+    const L2 = relativeLuminance(parseColorToRGB(c2));
+    const [max, min] = L1 >= L2 ? [L1, L2] : [L2, L1];
+    return (max + 0.05) / (min + 0.05);
+}
+
+function getBackgroundColor(el) {
+    const cs = getComputedStyle(el);
+    let bg = cs.backgroundColor;
+    if (!bg || bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent') {
+        if (el.parentElement) return getBackgroundColor(el.parentElement);
+        return 'rgb(255,255,255)';
+    }
+    return bg;
+}
+
+function runNatalAccessibilityTests() {
+    const results = [];
+    function assert(name, cond, extra) { results.push(`${cond ? '✓' : '✗'} ${name}${extra ? ' ('+extra+')' : ''}`); }
+
+    clearThemes();
+    setColorSchemePreference('light');
+    applySchemeForTheme('natal', 'light');
+
+    const selectors = [
+        '.theme-natal.theme-light .hero-text h2',
+        '.theme-natal.theme-light .section',
+        '.theme-natal.theme-light .product-modal-content',
+        '.theme-natal.theme-light .auth-card',
+        '.theme-natal.theme-light .footer',
+        '.theme-natal.theme-light .user-greeting',
+        '.theme-natal.theme-light .user-link',
+        '.theme-natal.theme-light .close-modal'
+    ];
+    selectors.forEach(sel => {
+        const el = document.querySelector(sel);
+        if (!el) {
+            assert(`Elemento não encontrado: ${sel}`, false);
+            return;
+        }
+        const cs = getComputedStyle(el);
+        const fg = cs.color;
+        const bg = getBackgroundColor(el);
+        const ratio = contrastRatio(fg, bg);
+        assert(`Contraste adequado em ${sel}`, ratio >= 4.5, `ratio=${ratio.toFixed(2)}`);
+        assert(`Cor segue ícones em ${sel}`, /#0f7b2d|rgb\(15,\s*123,\s*45\)/i.test(fg));
+    });
+
+    console.log('Natal A11y tests:', results);
+}
+
+if (window.location.search.includes('natalA11y=1')) {
+    runNatalAccessibilityTests();
+}
+
+// Partículas para Black Friday
+function addBlackFridayParticles() {
+    if (document.getElementById('bf-particles')) return;
+    const container = document.createElement('div');
+    container.id = 'bf-particles';
+    container.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+        overflow: hidden;
+    `;
+
+    // Adiciona keyframes se não existir
+    if (!document.getElementById('bf-particle-animation')) {
+        const style = document.createElement('style');
+        style.id = 'bf-particle-animation';
+        style.textContent = `
+            @keyframes bfParticleFall {
+                0% {
+                    transform: translateY(0) translateX(0) scale(1);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(110vh) translateX(var(--particle-x, 0px)) scale(0);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    const particleCount = 50;
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        const size = Math.random() * 4 + 2;
+        const left = Math.random() * 100;
+        const duration = (10 + Math.random() * 20).toFixed(2);
+        const delay = Math.random() * 5;
+        const opacity = 0.3 + Math.random() * 0.4;
+        const randomX = (Math.random() * 100 - 50).toFixed(2);
+
+        particle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background: radial-gradient(circle, #ff2b2b, transparent);
+            border-radius: 50%;
+            left: ${left}%;
+            top: -10px;
+            opacity: ${opacity};
+            --particle-x: ${randomX}px;
+            animation: bfParticleFall ${duration}s linear infinite;
+            animation-delay: ${delay}s;
+            box-shadow: 0 0 10px rgba(255,43,43,0.8);
+        `;
+        container.appendChild(particle);
+    }
+
+    document.body.appendChild(container);
+}
+
+// Estrelas para Natal
+function addNatalStars() {
+    if (document.getElementById('natal-stars')) return;
+    const container = document.createElement('div');
+    container.id = 'natal-stars';
+    container.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+        overflow: hidden;
+    `;
+
+    const starCount = 10; // Reduzido para melhor performance
+    for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        const size = Math.random() * 3 + 2;
+        const left = Math.random() * 100;
+        const top = Math.random() * 100;
+        const duration = (2 + Math.random() * 3).toFixed(2);
+        const delay = Math.random() * 2;
+
+        star.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            left: ${left}%;
+            top: ${top}%;
+            background: radial-gradient(circle, #FFD700, transparent);
+            border-radius: 50%;
+            animation: starTwinkle ${duration}s ease-in-out infinite;
+            animation-delay: ${delay}s;
+            box-shadow: 0 0 6px rgba(255,215,0,0.6);
+            will-change: opacity, transform;
+            transform: translate3d(0, 0, 0);
+        `;
+        container.appendChild(star);
+    }
+
+    // Adiciona keyframes se não existir
+    if (!document.getElementById('natal-star-animation')) {
+        const style = document.createElement('style');
+        style.id = 'natal-star-animation';
+        style.textContent = `
+            @keyframes starTwinkle {
+                0%, 100% {
+                    opacity: 0.4;
+                    transform: scale3d(1, 1, 1);
+                }
+                50% {
+                    opacity: 0.8;
+                    transform: scale3d(1.2, 1.2, 1);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    document.body.appendChild(container);
+}
+
+function showPromoBanner(innerHtml) {
+    const banner = document.getElementById('promoBanner');
+    const content = document.getElementById('promoContent');
+    if (banner && content) {
+        content.innerHTML = innerHtml;
+        banner.style.display = 'block';
+        console.log('Banner promocional exibido');
+    } else {
+        console.error('Banner ou conteúdo não encontrado', { banner, content });
+    }
+}
+
+function addChristmasGarland() {
+    // Cria uma guirlanda/pisca-pisca no topo
+    const garland = document.createElement('div');
+    garland.id = 'natal-garland';
+    garland.className = 'garland';
+    // 24 lâmpadas alternando cores
+    for (let i = 0; i < 24; i++) {
+        const bulb = document.createElement('span');
+        bulb.className = 'bulb';
+        garland.appendChild(bulb);
+    }
+    document.body.appendChild(garland);
+}
+
+// ===== Neve (Tema Natal) - Mais Intensa =====
+function addSnow() {
+    if (document.getElementById('snow-container')) return;
+    const container = document.createElement('div');
+    container.id = 'snow-container';
+    container.className = 'snow-container';
+    const flakes = 50; // Reduzido para melhor performance
+
+    // Adiciona keyframes para neve se não existir
+    if (!document.getElementById('snow-animation')) {
+        const style = document.createElement('style');
+        style.id = 'snow-animation';
+        style.textContent = `
+            @keyframes snow-fall {
+                0% {
+                    transform: translateY(0) translateX(0);
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: translateY(100vh) translateX(var(--sway-x, 0px));
+                    opacity: 0.3;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    for (let i = 0; i < flakes; i++) {
+        const s = document.createElement('span');
+        s.className = 'snowflake';
+        const size = Math.random() * 5 + 2;
+        const left = Math.random() * 100;
+        const fallDur = (5 + Math.random() * 12).toFixed(2);
+        const delay = (Math.random() * 10).toFixed(2);
+        const swayAmount = (Math.random() * 40 - 20).toFixed(2);
+
+        s.style.left = `${left}vw`;
+        s.style.width = `${size}px`;
+        s.style.height = `${size}px`;
+        s.style.setProperty('--sway-x', `${swayAmount}px`);
+        s.style.animation = `snow-fall ${fallDur}s linear infinite`;
+        s.style.animationDelay = `${delay}s`;
+        s.style.opacity = String(0.7 + Math.random() * 0.3);
+        s.style.filter = 'drop-shadow(0 0 4px rgba(255,255,255,0.8))';
+        container.appendChild(s);
+    }
+    document.body.appendChild(container);
+}
 
 // Adiciona estilos CSS dinâmicos para animações
 const style = document.createElement('style');

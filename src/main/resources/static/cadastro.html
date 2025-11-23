@@ -113,6 +113,12 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+        // Aplica o tema salvo
+        const savedTheme = localStorage.getItem('autentikaTheme');
+        if (savedTheme && window.applyTheme) {
+            window.applyTheme(savedTheme);
+        }
+
         const registerForm = document.getElementById('registerForm');
         const phoneInput = document.getElementById('registerPhone');
         if (phoneInput) {
@@ -129,7 +135,7 @@
                 const password = document.getElementById('registerPassword').value;
                 const confirmPassword = document.getElementById('registerConfirmPassword').value;
                 const acceptTerms = document.getElementById('acceptTerms').checked;
-                
+
                 if (!name || !email || !phone || !password || !confirmPassword) {
                     alert('Por favor, preencha todos os campos.');
                     return;
@@ -151,14 +157,13 @@
                     alert('Por favor, aceite os termos e condições para continuar.');
                     return;
                 }
-                
+
                 const submitButton = registerForm.querySelector('button[type="submit"]');
                 const originalText = submitButton.textContent;
                 submitButton.textContent = 'Criando conta...';
                 submitButton.disabled = true;
-                
+
                 try {
-                    // Faz a requisição para a API
                     const response = await fetch('http://localhost:8080/api/auth/cadastro', {
                         method: 'POST',
                         headers: {
@@ -170,21 +175,19 @@
                             senhaHash: password
                         })
                     });
-                    
+
                     const data = await response.json();
-                    
-                    if (data.success) {
-                        // Salva informações do usuário no localStorage para manter logado
+
+                    if (response.ok && data && data.success) {
                         if (data.usuario) {
                             localStorage.setItem('usuario', JSON.stringify(data.usuario));
                             localStorage.setItem('usuarioId', data.usuario.id);
                             localStorage.setItem('isLoggedIn', 'true');
                         }
-                        
                         alert('Conta criada com sucesso! Bem-vindo à AutêntikA!');
                         window.location.href = 'index.html';
                     } else {
-                        alert('Erro: ' + data.message);
+                        alert('Erro: ' + ((data && data.message) || 'Erro ao criar conta'));
                         submitButton.textContent = originalText;
                         submitButton.disabled = false;
                     }
